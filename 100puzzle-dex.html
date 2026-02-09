@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100퍼즐 도감 ✨</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================
+           CSS VARIABLES
+        ============================================ */
+        :root {
+            --pink: #ff9ecd;
+            --pink-light: #ffcce5;
+            --pink-dark: #ff6bb3;
+            --pink-pale: #fff0f7;
+            --white: #ffffff;
+            --text-dark: #5a3a4f;
+            --shadow: rgba(255, 158, 205, 0.3);
+            --shadow-heavy: rgba(255, 158, 205, 0.5);
+        }
+        
+        /* ============================================
+           GLOBAL RESET & BASE STYLES
+        ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none !important;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, var(--pink-pale) 0%, #ffe6f2 50%, var(--pink-light) 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* ============================================
+           CUSTOM CURSOR
+        ============================================ */
+        #cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--pink-light);
+            pointer-events: none;
+            z-index: 99999;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: normal;
+        }
+        
+        #cursor::after {
+            content: '♥';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            color: var(--pink);
+        }
+        
+        #cursor.hover {
+            transform: translate(-50%, -50%) scale(1.5);
+            background: var(--pink);
+        }
+        
+        #cursor.hover::after {
+            color: var(--white);
+        }
+        
+        /* ============================================
+           HEADER & NAVIGATION
+        ============================================ */
+        header {
+            background: linear-gradient(90deg, var(--pink) 0%, var(--pink-dark) 100%);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 8px 24px var(--shadow-heavy);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 5px solid var(--white);
+        }
+        
+        h1 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 3em;
+            color: var(--white);
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .nav-btn {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.1em;
+            font-weight: 600;
+            padding: 12px 28px;
+            background: var(--white);
+            color: var(--pink);
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: var(--pink-light);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+        }
+        
+        .nav-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .nav-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-btn.active {
+            background: var(--pink-dark);
+            color: var(--white);
+            transform: scale(1.05);
+        }
+        
+        /* ============================================
+           MAIN CONTENT CONTAINER
+        ============================================ */
+        main {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px 100px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 2.5em;
+            color: var(--pink-dark);
+            text-align: center;
+            margin: 40px 0 30px;
+            text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.5);
+        }
+        
+        /* ============================================
+           CHARACTER CARDS GRID
+        ============================================ */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .character-card {
+            background: var(--white);
+            border: 5px solid var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            animation: slideUp 0.6s ease backwards;
+        }
+        
+        .character-card:nth-child(1) { animation-delay: 0.1s; }
+        .character-card:nth-child(2) { animation-delay: 0.2s; }
+        .character-card:nth-child(3) { animation-delay: 0.3s; }
+        .character-card:nth-child(4) { animation-delay: 0.4s; }
+        .character-card:nth-child(5) { animation-delay: 0.5s; }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .character-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 12px 32px var(--shadow-heavy);
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: linear-gradient(135deg, var(--pink-pale), var(--pink-light));
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-name {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--pink-dark);
+            margin-bottom: 10px;
+        }
+        
+        .card-attribute {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: var(--pink-pale);
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .attribute-icon {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+        
+        .card-theme {
+            color: var(--text-dark);
+            font-size: 0.95em;
+            margin-top: 8px;
+            opacity: 0.8;
+        }
+        
+        /* ============================================
+           ATTRIBUTE FILTERS
+        ============================================ */
+        .filter-section {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .filter-btn {
+            font-family: 'Quicksand', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: var(--white);
+            border: 3px solid var(--pink-light);
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--pink-dark);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        
+        .filter-btn img {
+            width: 28px;
+            height: 28px;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--pink);
+            color: var(--white);
+            border-color: var(--pink);
+            transform: scale(1.05);
+        }
+        
+        /* ============================================
+           FORTUNE SECTION
+        ============================================ */
+        .fortune-container {
+            max-width: 600px;
+            margin: 60px auto;
+            text-align: center;
+        }
+        
+        .fortune-btn {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            padding: 20px 50px;
+            background: linear-gradient(135deg, var(--pink) 0%, var(--pink-dark) 100%);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 8px 24px var(--shadow-heavy);
+            transition: all 0.3s ease;
+            margin-bottom: 40px;
+        }
+        
+        .fortune-btn:hover {
+            transform: scale(1.1) rotate(-2deg);
+            box-shadow: 0 12px 32px var(--shadow-heavy);
+        }
+        
+        .fortune-result {
+            background: var(--white);
+            border: 5px solid var(--white);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 12px 32px var(--shadow-heavy);
+            min-height: 300px;
+            display: none;
+            animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .fortune-result.show {
+            display: block;
+        }
+        
+        @keyframes popIn {
+            0% { transform: scale(0.5) rotate(-10deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+        
+        .fortune-character-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--pink-light);
+            margin: 0 auto 20px;
+            display: block;
+        }
+        
+        .fortune-text {
+            font-size: 1.3em;
+            color: var(--pink-dark);
+            font-weight: 600;
+            line-height: 1.8;
+        }
+        
+        /* ============================================
+           LANGUAGE SELECTOR (FIXED BOTTOM)
+        ============================================ */
+        .language-selector {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--white);
+            border: 4px solid var(--pink);
+            border-radius: 50px;
+            padding: 10px 20px;
+            box-shadow: 0 8px 24px var(--shadow-heavy);
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .lang-btn {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1em;
+            font-weight: 600;
+            padding: 8px 16px;
+            background: transparent;
+            color: var(--pink);
+            border: none;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-btn:hover,
+        .lang-btn.active {
+            background: var(--pink);
+            color: var(--white);
+        }
+        
+        /* ============================================
+           THEME SECTIONS
+        ============================================ */
+        .theme-group {
+            margin: 40px 0;
+        }
+        
+        .theme-header {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 2em;
+            color: var(--pink);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--pink-light);
+        }
+        
+        /* ============================================
+           RESPONSIVE DESIGN
+        ============================================ */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .section-title {
+                font-size: 1.8em;
+            }
+            
+            .cards-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 20px;
+            }
+            
+            nav {
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                font-size: 0.95em;
+                padding: 10px 20px;
+            }
+            
+            .language-selector {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 15px;
+            }
+        }
+        
+        /* ============================================
+           EMPTY STATE
+        ============================================ */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--pink);
+            font-size: 1.2em;
+        }
+        
+        .empty-state::before {
+            content: '💗';
+            font-size: 4em;
+            display: block;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div id="cursor"></div>
+    
+    <!-- Header -->
+    <header>
+        <h1>✨ 100퍼즐 도감 ✨</h1>
+        <nav>
+            <button class="nav-btn active" data-section="all"><span id="nav-all">전체</span></button>
+            <button class="nav-btn" data-section="attribute"><span id="nav-attribute">속성별</span></button>
+            <button class="nav-btn" data-section="theme"><span id="nav-theme">테마별</span></button>
+            <button class="nav-btn" data-section="character"><span id="nav-character">캐릭터별</span></button>
+            <button class="nav-btn" data-section="fortune"><span id="nav-fortune">오늘의 운세</span></button>
+        </nav>
+    </header>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Section: All Characters -->
+        <section id="all" class="section active">
+            <h2 class="section-title" id="title-all">전체</h2>
+            <div class="cards-grid" id="all-cards"></div>
+        </section>
+        
+        <!-- Section: By Attribute -->
+        <section id="attribute" class="section">
+            <h2 class="section-title" id="title-attribute">속성별</h2>
+            <div class="filter-section">
+                <button class="filter-btn" data-attr="red">
+                    <img src="https://i.imgur.com/MOJfYub.png" alt="빨강">
+                    <span id="attr-red">빨강</span>
+                </button>
+                <button class="filter-btn" data-attr="yellow">
+                    <img src="https://i.imgur.com/qv6TUtA.png" alt="노랑">
+                    <span id="attr-yellow">노랑</span>
+                </button>
+                <button class="filter-btn" data-attr="green">
+                    <img src="https://i.imgur.com/oOZ0svY.png" alt="초록">
+                    <span id="attr-green">초록</span>
+                </button>
+                <button class="filter-btn" data-attr="sky">
+                    <img src="https://i.imgur.com/K40J1pK.png" alt="하늘">
+                    <span id="attr-sky">하늘</span>
+                </button>
+                <button class="filter-btn" data-attr="purple">
+                    <img src="https://i.imgur.com/dzAAZg2.png" alt="보라">
+                    <span id="attr-purple">보라</span>
+                </button>
+            </div>
+            <div class="cards-grid" id="attribute-cards"></div>
+        </section>
+        
+        <!-- Section: By Theme -->
+        <section id="theme" class="section">
+            <h2 class="section-title" id="title-theme">테마별</h2>
+            <div id="theme-cards"></div>
+        </section>
+        
+        <!-- Section: By Character -->
+        <section id="character" class="section">
+            <h2 class="section-title" id="title-character">캐릭터별</h2>
+            <div class="cards-grid" id="character-cards"></div>
+        </section>
+        
+        <!-- Section: Fortune -->
+        <section id="fortune" class="section">
+            <h2 class="section-title" id="title-fortune">오늘의 운세</h2>
+            <div class="fortune-container">
+                <button class="fortune-btn" id="fortune-btn">🔮 <span id="fortune-btn-text">운세 보기</span></button>
+                <div class="fortune-result" id="fortune-result">
+                    <img class="fortune-character-img" id="fortune-img" src="" alt="운세 캐릭터">
+                    <h3 class="card-name" id="fortune-name"></h3>
+                    <p class="fortune-text" id="fortune-text"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="lang-btn active" data-lang="ko">한국어</button>
+        <button class="lang-btn" data-lang="en">English</button>
+        <button class="lang-btn" data-lang="ja">日本語</button>
+    </div>
+    
+    <script>
+        // ============================================
+        // CHARACTER DATA
+        // ============================================
+        const characters = [
+            {
+                name: { ko: '하나조노 하카리 (키스 날리기)', en: 'Hanazono Hakari (Blowing Kiss)', ja: '花園羽香里（投げキッス）' },
+                image: 'https://pbs.twimg.com/media/GnXGPCdbEAAfdpW?format=jpg&name=large',
+                detailImage: 'https://pbs.twimg.com/media/GnXF_1CawAAjekY?format=jpg&name=large',
+                attribute: 'red',
+                theme: { ko: '키스 날리기', en: 'Blowing Kiss', ja: '投げキッス' },
+                skillName: { ko: '앞으로도 계속 함께네요♪', en: "Let's stay together forever♪", ja: 'これからもずっと一緒だね♪' },
+                skillDesc: { ko: '모든 빨강 피스를 전부 제거합니다.', en: 'Removes all red pieces.', ja: '全ての赤ピースを全て削除します。' }
+            },
+            {
+                name: { ko: '인다 카라네 (키스 날리기)', en: 'Inda Karane (Blowing Kiss)', ja: '院田唐音（投げキッス）' },
+                image: 'https://pbs.twimg.com/media/GnXUBBab0AEaIoq?format=jpg&name=large',
+                detailImage: 'https://pbs.twimg.com/media/GncPywbbsAAOTj8?format=jpg&name=large',
+                attribute: 'yellow',
+                theme: { ko: '키스 날리기', en: 'Blowing Kiss', ja: '投げキッス' },
+                skillName: { ko: '따, 딱히 만나서 기쁘다는 생각 같은 건 안 했거든', en: "It's not like I'm happy to see you", ja: 'べ、別に会えて嬉しいとか思ってないし' },
+                skillDesc: { ko: '모든 노랑 피스를 전부 제거합니다.', en: 'Removes all yellow pieces.', ja: '全ての黄色ピースを全て削除します。' }
+            },
+            {
+                name: { ko: '요시모토 시즈카 (키스 날리기)', en: 'Yoshimoto Shizuka (Blowing Kiss)', ja: '好本静（投げキッス）' },
+                image: 'https://pbs.twimg.com/media/Gn67wbSaEAAgc74?format=jpg&name=large',
+                detailImage: 'https://pbs.twimg.com/media/GoAE-s4bMAEQCiE?format=jpg&name=large',
+                attribute: 'sky',
+                theme: { ko: '키스 날리기', en: 'Blowing Kiss', ja: '投げキッス' },
+                skillName: { ko: '"소중한 그대여" 「앞으로도 잘 부탁드리는」"바입니다"', en: '"Dear precious you" "I look forward to your continued support"', ja: '「大切な貴方よ」「これからもよろしくお願い」「します」' },
+                skillDesc: { ko: '모든 하늘 피스를 전부 제거합니다.', en: 'Removes all sky pieces.', ja: '全ての空色ピースを全て削除します。' }
+            },
+            {
+                name: { ko: '에이아이 나노 (키스 날리기)', en: 'Eiai Nano (Blowing Kiss)', ja: '栄逢凪乃（投げキッス）' },
+                image: 'https://pbs.twimg.com/media/Gn7JKHYaUAALox7?format=jpg&name=large',
+                detailImage: 'https://pbs.twimg.com/media/GoAS2QCbUAA6_1H?format=jpg&name=large',
+                attribute: 'purple',
+                theme: { ko: '키스 날리기', en: 'Blowing Kiss', ja: '投げキッス' },
+                skillName: { ko: '네가 불러서 여기 온 거야', en: 'I came here because you called me', ja: 'あなたが呼んだからここに来たのよ' },
+                skillDesc: { ko: '모든 보라 피스를 전부 제거합니다.', en: 'Removes all purple pieces.', ja: '全ての紫ピースを全て削除します。' }
+            },
+            {
+                name: { ko: '야쿠젠 쿠스리 (키스 날리기)', en: 'Yakuzen Kusuri (Blowing Kiss)', ja: '薬膳楠莉（投げキッス）' },
+                image: 'https://pbs.twimg.com/media/Gofg0HFbkAAEaEH?format=jpg&name=large',
+                detailImage: 'https://pbs.twimg.com/media/GokIho4bQAAAZoH?format=jpg&name=large',
+                attribute: 'green',
+                theme: { ko: '키스 날리기', en: 'Blowing Kiss', ja: '投げキッス' },
+                skillName: { ko: '만나서 반가운 것이다-♪', en: 'Nice to meet you-♪', ja: '会えて嬉しいのだ-♪' },
+                skillDesc: { ko: '모든 초록 피스를 전부 제거합니다.', en: 'Removes all green pieces.', ja: '全ての緑ピースを全て削除します。' }
+            },
+            {
+                name: { ko: '야쿠젠 쿠스리(18세) (키스 날리기)', en: 'Yakuzen Kusuri (18) (Blowing Kiss)', ja: '薬膳楠莉（18歳）（投げキッス）' },
+                image: 'https://pbs.twimg.com/media/GofntvlaEAALPFH?format=jpg&name=large',
+                detailImage: 'https://pbs.twimg.com/media/GokV9OibAAAimte?format=jpg&name=large',
+                attribute: 'green',
+                theme: { ko: '키스 날리기', en: 'Blowing Kiss', ja: '投げキッス' },
+                skillName: { ko: '응? 어째서 얼굴이 빨개진 거야?', en: 'Hm? Why is your face red?', ja: 'ん？何で顔が赤くなってるの？' },
+                skillDesc: { ko: '모든 초록 피스를 전부 제거합니다.', en: 'Removes all green pieces.', ja: '全ての緑ピースを全て削除します。' }
+            },
+            {
+                name: { ko: '하나조노 하하리 (키스 날리기)', en: 'Hanazono Hahari (Blowing Kiss)', ja: '花園羽々里（投げキッス）' },
+                image: 'https://pbs.twimg.com/media/GofujyyaIAAsxkW?format=jpg&name=large',
+                detailImage: 'https://pbs.twimg.com/media/Gokjy8HbwAA8X3o?format=jpg&name=large',
+                attribute: 'red',
+                theme: { ko: '키스 날리기', en: 'Blowing Kiss', ja: '投げキッス' },
+                skillName: { ko: '당신과의 만남은 운명일지도♡', en: 'Meeting you might be destiny♡', ja: 'あなたとの出会いは運命かも♡' },
+                skillDesc: { ko: '모든 빨강 피스를 전부 제거합니다.', en: 'Removes all red pieces.', ja: '全ての赤ピースを全て削除します。' }
+            }
+        ];
+        
+        // ============================================
+        // ATTRIBUTE ICON MAPPING
+        // ============================================
+        const elementImages = {
+            '빨강': 'https://i.imgur.com/MOJfYub.png',
+            '노랑': 'https://i.imgur.com/qv6TUtA.png',
+            '초록': 'https://i.imgur.com/oOZ0svY.png',
+            '하늘': 'https://i.imgur.com/K40J1pK.png',
+            '보라': 'https://i.imgur.com/dzAAZg2.png'
+        };
+        
+        const attributeIcons = {
+            red: elementImages['빨강'],
+            yellow: elementImages['노랑'],
+            green: elementImages['초록'],
+            sky: elementImages['하늘'],
+            purple: elementImages['보라']
+        };
+        
+        const attributeNames = {
+            red: { ko: '빨강', en: 'Red', ja: '赤' },
+            yellow: { ko: '노랑', en: 'Yellow', ja: '黄色' },
+            green: { ko: '초록', en: 'Green', ja: '緑' },
+            sky: { ko: '하늘', en: 'Sky', ja: '空色' },
+            purple: { ko: '보라', en: 'Purple', ja: '紫' }
+        };
+        
+        // ============================================
+        // FORTUNE MESSAGES
+        // ============================================
+        const fortuneMessages = {
+            ko: [
+                '오늘은 행운이 가득한 날이에요! 🍀',
+                '새로운 친구를 만날 수 있는 날이에요! 💕',
+                '즐거운 일이 기다리고 있어요! ✨',
+                '오늘은 조금 조심하세요! 💫',
+                '행복한 하루가 될 거예요! 🌈',
+                '좋은 소식이 들려올 거예요! 🎉'
+            ],
+            en: [
+                "Today is full of luck! 🍀",
+                "You'll meet new friends today! 💕",
+                "Fun things are waiting for you! ✨",
+                "Be a little careful today! 💫",
+                "It will be a happy day! 🌈",
+                "Good news will come! 🎉"
+            ],
+            ja: [
+                "今日は幸運に満ちた日です！ 🍀",
+                "新しい友達に会える日です！ 💕",
+                "楽しいことが待っています！ ✨",
+                "今日は少し気をつけて！ 💫",
+                "幸せな一日になります！ 🌈",
+                "良いニュースが聞こえてきます！ 🎉"
+            ]
+        };
+        
+        // ============================================
+        // TRANSLATIONS
+        // ============================================
+        const translations = {
+            ko: {
+                'nav-all': '전체',
+                'nav-attribute': '속성별',
+                'nav-theme': '테마별',
+                'nav-character': '캐릭터별',
+                'nav-fortune': '오늘의 운세',
+                'title-all': '전체',
+                'title-attribute': '속성별',
+                'title-theme': '테마별',
+                'title-character': '캐릭터별',
+                'title-fortune': '오늘의 운세',
+                'fortune-btn-text': '운세 보기',
+                'attr-red': '빨강',
+                'attr-yellow': '노랑',
+                'attr-green': '초록',
+                'attr-sky': '하늘',
+                'attr-purple': '보라'
+            },
+            en: {
+                'nav-all': 'All',
+                'nav-attribute': 'By Attribute',
+                'nav-theme': 'By Theme',
+                'nav-character': 'By Character',
+                'nav-fortune': 'Fortune',
+                'title-all': 'All',
+                'title-attribute': 'By Attribute',
+                'title-theme': 'By Theme',
+                'title-character': 'By Character',
+                'title-fortune': "Today's Fortune",
+                'fortune-btn-text': 'Get Fortune',
+                'attr-red': 'Red',
+                'attr-yellow': 'Yellow',
+                'attr-green': 'Green',
+                'attr-sky': 'Sky',
+                'attr-purple': 'Purple'
+            },
+            ja: {
+                'nav-all': '全体',
+                'nav-attribute': '属性別',
+                'nav-theme': 'テーマ別',
+                'nav-character': 'キャラクター別',
+                'nav-fortune': '今日の運勢',
+                'title-all': '全体',
+                'title-attribute': '属性別',
+                'title-theme': 'テーマ別',
+                'title-character': 'キャラクター別',
+                'title-fortune': '今日の運勢',
+                'fortune-btn-text': '運勢を見る',
+                'attr-red': '赤',
+                'attr-yellow': '黄色',
+                'attr-green': '緑',
+                'attr-sky': '空色',
+                'attr-purple': '紫'
+            }
+        };
+        
+        // ============================================
+        // STATE
+        // ============================================
+        let currentLang = 'ko';
+        let currentAttributeFilter = null;
+        
+        // ============================================
+        // CUSTOM CURSOR
+        // ============================================
+        const cursor = document.getElementById('cursor');
+        let cursorX = 0;
+        let cursorY = 0;
+        let currentX = 0;
+        let currentY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+        });
+        
+        function animateCursor() {
+            currentX += (cursorX - currentX) * 0.8;
+            currentY += (cursorY - currentY) * 0.8;
+            cursor.style.left = currentX + 'px';
+            cursor.style.top = currentY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+        
+        // Cursor hover effect
+        document.addEventListener('mouseover', (e) => {
+            const target = e.target;
+            if (target && (target.tagName === 'BUTTON' || 
+                target.tagName === 'A' || 
+                target.classList.contains('character-card') ||
+                target.closest('button') ||
+                target.closest('a') ||
+                target.closest('.character-card'))) {
+                cursor.classList.add('hover');
+            } else {
+                cursor.classList.remove('hover');
+            }
+        });
+        
+        // ============================================
+        // NAVIGATION
+        // ============================================
+        const navButtons = document.querySelectorAll('.nav-btn');
+        const sections = document.querySelectorAll('.section');
+        
+        navButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetSection = btn.getAttribute('data-section');
+                
+                // Update active nav button
+                navButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Update active section
+                sections.forEach(s => s.classList.remove('active'));
+                document.getElementById(targetSection).classList.add('active');
+            });
+        });
+        
+        // ============================================
+        // RENDER CHARACTER CARD
+        // ============================================
+        function createCharacterCard(char) {
+            return `
+                <div class="character-card">
+                    <img class="card-image" src="${char.image}" alt="${char.name[currentLang]}">
+                    <div class="card-content">
+                        <h3 class="card-name">${char.name[currentLang]}</h3>
+                        <div class="card-attribute">
+                            <img class="attribute-icon" src="${attributeIcons[char.attribute]}" alt="${attributeNames[char.attribute][currentLang]}">
+                            <span>${attributeNames[char.attribute][currentLang]}</span>
+                        </div>
+                        <p class="card-theme">${char.theme[currentLang]}</p>
+                        ${char.skillName ? `
+                            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--pink-light);">
+                                <div style="font-weight: 700; color: var(--pink-dark); margin-bottom: 5px; font-size: 0.95em;">
+                                    ${char.skillName[currentLang]}
+                                </div>
+                                <div style="font-size: 0.85em; color: var(--text-dark); opacity: 0.7; line-height: 1.4;">
+                                    ${char.skillDesc[currentLang]}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+        
+        // ============================================
+        // RENDER ALL CHARACTERS
+        // ============================================
+        function renderAllCharacters() {
+            const container = document.getElementById('all-cards');
+            container.innerHTML = characters.map(char => createCharacterCard(char)).join('');
+        }
+        
+        // ============================================
+        // RENDER BY ATTRIBUTE
+        // ============================================
+        function renderByAttribute(filter = null) {
+            const container = document.getElementById('attribute-cards');
+            const filtered = filter 
+                ? characters.filter(char => char.attribute === filter)
+                : characters;
+            
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="empty-state">캐릭터가 없습니다</div>';
+            } else {
+                container.innerHTML = filtered.map(char => createCharacterCard(char)).join('');
+            }
+        }
+        
+        // Attribute filter buttons
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const attr = btn.getAttribute('data-attr');
+                
+                if (currentAttributeFilter === attr) {
+                    // Deselect
+                    currentAttributeFilter = null;
+                    btn.classList.remove('active');
+                    renderByAttribute();
+                } else {
+                    // Select
+                    currentAttributeFilter = attr;
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderByAttribute(attr);
+                }
+            });
+        });
+        
+        // ============================================
+        // RENDER BY THEME
+        // ============================================
+        function renderByTheme() {
+            const container = document.getElementById('theme-cards');
+            const themes = {};
+            
+            characters.forEach(char => {
+                const themeName = char.theme[currentLang];
+                if (!themes[themeName]) {
+                    themes[themeName] = [];
+                }
+                themes[themeName].push(char);
+            });
+            
+            let html = '';
+            for (const [themeName, chars] of Object.entries(themes)) {
+                html += `
+                    <div class="theme-group">
+                        <h3 class="theme-header">${themeName}</h3>
+                        <div class="cards-grid">
+                            ${chars.map(char => createCharacterCard(char)).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        // ============================================
+        // RENDER BY CHARACTER
+        // ============================================
+        function renderByCharacter() {
+            const container = document.getElementById('character-cards');
+            // Sort alphabetically by name
+            const sorted = [...characters].sort((a, b) => 
+                a.name[currentLang].localeCompare(b.name[currentLang])
+            );
+            container.innerHTML = sorted.map(char => createCharacterCard(char)).join('');
+        }
+        
+        // ============================================
+        // FORTUNE
+        // ============================================
+        const fortuneBtn = document.getElementById('fortune-btn');
+        const fortuneResult = document.getElementById('fortune-result');
+        
+        fortuneBtn.addEventListener('click', () => {
+            const randomChar = characters[Math.floor(Math.random() * characters.length)];
+            const randomMessage = fortuneMessages[currentLang][Math.floor(Math.random() * fortuneMessages[currentLang].length)];
+            
+            document.getElementById('fortune-img').src = randomChar.image;
+            document.getElementById('fortune-name').textContent = randomChar.name[currentLang];
+            document.getElementById('fortune-text').textContent = randomMessage;
+            
+            fortuneResult.classList.remove('show');
+            setTimeout(() => {
+                fortuneResult.classList.add('show');
+            }, 50);
+        });
+        
+        // ============================================
+        // LANGUAGE SWITCHING
+        // ============================================
+        const langButtons = document.querySelectorAll('.lang-btn');
+        
+        function updateLanguage(lang) {
+            currentLang = lang;
+            
+            // Update UI text
+            for (const [id, text] of Object.entries(translations[lang])) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = text;
+                }
+            }
+            
+            // Re-render all sections
+            renderAllCharacters();
+            renderByAttribute(currentAttributeFilter);
+            renderByTheme();
+            renderByCharacter();
+            
+            // Update active language button
+            langButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+        }
+        
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-lang');
+                updateLanguage(lang);
+            });
+        });
+        
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        function init() {
+            renderAllCharacters();
+            renderByAttribute();
+            renderByTheme();
+            renderByCharacter();
+        }
+        
+        init();
+    </script>
+</body>
+</html>
