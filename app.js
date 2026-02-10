@@ -36,8 +36,8 @@ const translations = {
 // ============================================
 let currentLang = 'ko';
 let currentAttributeFilter = 'red';
-let currentThemeFilter = null;
-let currentCharacterFilter = null;
+let currentThemeFilter = '投げキッス';
+let currentCharacterFilter = '花園羽香里';
 
 // ============================================
 // 커서

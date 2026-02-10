@@ -1,6 +1,20 @@
 /* ============================================
    CSS VARIABLES
 ============================================ */
+@font-face {
+    font-family: 'NexonMaplestory';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.woff') format('woff');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-display: swap;
+}
+
 :root {
     --pink: #ff9ecd;
     --pink-light: #ffcce5;
@@ -27,7 +41,7 @@ html {
 }
 
 body {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Quicksand', 'Kosugi Maru', 'NexonMaplestory', sans-serif;
     background: linear-gradient(135deg, var(--pink-pale) 0%, #ffe6f2 50%, var(--pink-light) 100%);
     min-height: 100vh;
     color: var(--text-dark);
@@ -46,7 +60,7 @@ body {
     background: var(--pink-light);
     pointer-events: none;
     z-index: 99999;
-    transition: transform 0.2s ease, background-color 0.2s ease;
+    transition: transform 0.1s ease, background-color 0.2s ease;
     transform: translate(-50%, -50%);
     mix-blend-mode: normal;
 }
@@ -85,7 +99,7 @@ header {
 }
 
 h1 {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Quicksand', 'Kosugi Maru', 'NexonMaplestory', sans-serif;
     font-size: 3em;
     color: var(--white);
     text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
@@ -102,7 +116,7 @@ nav {
 }
 
 .nav-btn {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Quicksand', 'Kosugi Maru', 'NexonMaplestory', sans-serif;
     font-size: 1.1em;
     font-weight: 600;
     padding: 12px 28px;
@@ -242,8 +256,8 @@ main {
 }
 
 .card-name {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1.3em;
+    font-family: 'Quicksand', 'Kosugi Maru', 'NexonMaplestory', sans-serif;
+    font-size: 1.5em;
     font-weight: 700;
     color: var(--pink-dark);
 }
@@ -260,7 +274,7 @@ main {
 }
 
 .filter-btn {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Quicksand', 'Kosugi Maru', 'NexonMaplestory', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -369,7 +383,7 @@ main {
 }
 
 .modal-name {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Quicksand', 'Kosugi Maru', 'NexonMaplestory', sans-serif;
     font-size: 2em;
     font-weight: 700;
     color: var(--pink-dark);
@@ -396,8 +410,8 @@ main {
 }
 
 .modal-skill-name {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1.1em;
+    font-family: 'Quicksand', 'Kosugi Maru', 'NexonMaplestory', sans-serif;
+    font-size: 1.16em;
     font-weight: 700;
     color: var(--pink-dark);
     margin-bottom: 10px;
@@ -406,7 +420,8 @@ main {
 }
 
 .modal-skill-desc {
-    font-size: 1em;
+    font-family: 'Quicksand', 'Kosugi Maru', 'Pretendard', sans-serif;
+    font-size: 1.05em;
     line-height: 1.6;
     color: var(--text-dark);
     white-space: pre-line;
@@ -430,7 +445,7 @@ main {
 }
 
 .fortune-btn {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Quicksand', 'Kosugi Maru', 'NexonMaplestory', sans-serif;
     font-size: 1.5em;
     font-weight: 700;
     padding: 20px 50px;
@@ -505,7 +520,7 @@ main {
 }
 
 .lang-btn {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Quicksand', 'Kosugi Maru', 'NexonMaplestory', sans-serif;
     font-size: 1em;
     font-weight: 600;
     padding: 8px 16px;
