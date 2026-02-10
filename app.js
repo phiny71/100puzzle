@@ -9,7 +9,8 @@ const translations = {
         'nav-theme': '테마별',
         'nav-character': '캐릭터별',
         'nav-fortune': '오늘의 운세',
-        'fortune-btn-text': '운세 보기'
+        'fortune-btn-text': '운세 보기',
+        'required-pieces': '필요 피스 수 (Lv.5)'  // ← 추가
     },
     en: {
         'main-title': '💖 100 Puzzle Encyclopedia 💖',
@@ -18,7 +19,8 @@ const translations = {
         'nav-theme': 'By Theme',
         'nav-character': 'By Character',
         'nav-fortune': 'Fortune',
-        'fortune-btn-text': 'Get Fortune'
+        'fortune-btn-text': 'Get Fortune',
+        'required-pieces': 'Required Pieces (Lv.5)'  // ← 추가
     },
     ja: {
         'main-title': '💖 100パズル図鑑 💖',
@@ -27,23 +29,23 @@ const translations = {
         'nav-theme': 'テーマ別',
         'nav-character': 'キャラクター別',
         'nav-fortune': '今日の運勢',
-        'fortune-btn-text': '運勢を見る'
+        'fortune-btn-text': '運勢を見る',
+        'required-pieces': '必要ピース数 (Lv.5)'  // ← 추가
     }
 };
 
 // ============================================
-// 상태
+// 상태 (초기값 설정)
 // ============================================
 let currentLang = 'ko';
 let currentAttributeFilter = 'red';
-let currentThemeFilter = '投げキッス';
-let currentCharacterFilter = '花園羽香里';
+let currentThemeFilter = ''; // 초기화 시 설정됨
+let currentCharacterFilter = ''; // 초기화 시 설정됨
 
 // ============================================
-// 커서
+// 커서 애니메이션
 // ============================================
 const cursor = document.getElementById('cursor');
-const modal = document.getElementById('modal');
 let cursorX = 0, cursorY = 0, currentX = 0, currentY = 0;
 
 document.addEventListener('mousemove', (e) => {
@@ -52,62 +54,70 @@ document.addEventListener('mousemove', (e) => {
 });
 
 function animateCursor() {
-    currentX += (cursorX - currentX) * 0.8;
-    currentY += (cursorY - currentY) * 0.8;
-    cursor.style.left = currentX + 'px';
-    cursor.style.top = currentY + 'px';
+    currentX += (cursorX - currentX) * 0.3; // 부드러움 조절
+    currentY += (cursorY - currentY) * 0.3;
+    if(cursor) {
+        cursor.style.left = currentX + 'px';
+        cursor.style.top = currentY + 'px';
+    }
     requestAnimationFrame(animateCursor);
 }
 animateCursor();
 
+// 호버 효과 통합 관리
 document.addEventListener('mouseover', (e) => {
-    const target = e.target;
-    cursor.classList.toggle('hover', 
-        target && (
-            target.tagName === 'BUTTON' || 
-            target.tagName === 'A' || 
-            target.classList.contains('character-card') ||
-            target.closest('button') ||
-            target.closest('a') ||
-            target.closest('.character-card')
-        )
-    );
+    const target = e.target.closest('button, a, .character-card');
+    cursor.classList.toggle('hover', !!target);
 });
+
+// ============================================
+// 렌더링 통합 관리 (핵심 최적화)
+// ============================================
+function refreshCurrentSection() {
+    const activeSection = document.querySelector('.section.active').id;
+    
+    // 공통 필터 버튼은 항상 갱신
+    renderAttributeFilters();
+    renderThemeFilters();
+    renderCharacterFilters();
+
+    // 현재 보고 있는 섹션만 실제 카드 렌더링
+    if (activeSection === 'all') {
+        renderAllCharacters();
+    } else if (activeSection === 'attribute') {
+        renderByAttribute(currentAttributeFilter);
+    } else if (activeSection === 'theme') {
+        renderByTheme(currentThemeFilter);
+    } else if (activeSection === 'character') {
+        renderByCharacter(currentCharacterFilter);
+    }
+}
 
 // ============================================
 // 네비게이션
 // ============================================
 document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-        window.scrollTo(0, 0); // 스크롤 맨 위로
-        
         const targetSection = btn.getAttribute('data-section');
         
+        // UI 전환
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         document.getElementById(targetSection).classList.add('active');
         
-        if (targetSection === 'attribute') {
-            currentAttributeFilter = 'red';
-            renderAttributeFilters();
-            renderByAttribute('red');
-        } else if (targetSection === 'theme') {
-            const themes = getUniqueThemes();
-            if (themes.length > 0) {
-                currentThemeFilter = themes[0];
-                renderThemeFilters();
-                renderByTheme(themes[0]);
-            }
-        } else if (targetSection === 'character') {
-            const sortedChars = getSortedCharacters();
-            if (sortedChars.length > 0) {
-                currentCharacterFilter = sortedChars[0].name[currentLang];
-                renderCharacterFilters();
-                renderByCharacter(sortedChars[0].name[currentLang]);
-            }
+        window.scrollTo(0, 0);
+
+        // 섹션별 초기 필터값 세팅 및 렌더링
+        if (targetSection === 'theme' && !currentThemeFilter) {
+            currentThemeFilter = getUniqueThemes()[0];
         }
+        if (targetSection === 'character' && !currentCharacterFilter) {
+            const sorted = getSortedCharacters();
+            if(sorted.length > 0) currentCharacterFilter = sorted[0].name[currentLang];
+        }
+        
+        refreshCurrentSection();
     });
 });
 
@@ -142,6 +152,10 @@ function openModal(charIndex) {
     document.getElementById('modal-attribute').src = attributeIcons[char.attribute];
     document.getElementById('modal-theme').textContent = char.theme[currentLang];
     document.getElementById('modal-skill-name').textContent = char.skillName[currentLang];
+    
+    // 필요 피스 수 표시
+    document.getElementById('modal-required-label').textContent = translations[currentLang]['required-pieces'];
+    document.getElementById('modal-required-value').textContent = char.requiredPieces;
     
     let skillDesc = char.skillDesc[currentLang];
     
@@ -345,17 +359,43 @@ function renderByCharacter(filter) {
 // 운세
 // ============================================
 document.getElementById('fortune-btn').addEventListener('click', () => {
-    const charKeys = Object.keys(CHARS);
-    const randomKey = charKeys[Math.floor(Math.random() * charKeys.length)];
-    const charData = CHARS[randomKey];
+    // 전체 캐릭터 중에서 무작위로 선택
+    const randomChar = characters[Math.floor(Math.random() * characters.length)];
     
-    const randomChar = characters.find(c => c.name.ja === charData.name.ja);
+    // CHARS 객체에서 해당 캐릭터 찾기
+    // 쿠스리(18세)는 별도로 처리
+    let charKey;
+    if (randomChar.name.ja === '薬膳楠莉（18歳）') {
+        charKey = 'kusuri18';
+    } else {
+        // 괄호 제거한 기본 이름으로 찾기
+        const baseName = randomChar.name.ja.replace(/（.*?）/g, '');
+        charKey = Object.keys(CHARS).find(key => CHARS[key].name.ja === baseName);
+    }
+    
+    const charData = CHARS[charKey];
+
+// === 예외 처리 시작 ===
+    if (!charData || !charData.fortunes) { // ⬅️ 데이터가 없으면 실행 중단
+        console.error("운세 데이터를 찾을 수 없습니다:", baseName);
+        alert("운세를 가져오는 중 오류가 발생했습니다.");
+        return; 
+    }
+    // === 예외 처리 끝 ===
+    
+    // 해당 캐릭터의 운세 중 무작위로 선택
     const randomFortune = charData.fortunes[Math.floor(Math.random() * charData.fortunes.length)];
     
+    // 카드 이미지 (메인 이미지 사용)
     document.getElementById('fortune-img').src = randomChar.image;
+    
+    // 캐릭터 이름
     document.getElementById('fortune-name').textContent = randomChar.name[currentLang];
+    
+    // 운세 문구
     document.getElementById('fortune-text').textContent = randomFortune[currentLang];
     
+    // 결과 표시 (애니메이션)
     const fortuneResult = document.getElementById('fortune-result');
     fortuneResult.classList.remove('show');
     setTimeout(() => fortuneResult.classList.add('show'), 50);
@@ -367,30 +407,31 @@ document.getElementById('fortune-btn').addEventListener('click', () => {
 function updateLanguage(lang) {
     currentLang = lang;
     
+    // 1. 번역 텍스트 적용
     for (const [id, text] of Object.entries(translations[lang])) {
         const element = document.getElementById(id);
-        if (element) {
-            element.textContent = text;
-        }
+        if (element) element.textContent = text;
     }
     
-    renderAllCharacters();
-    renderAttributeFilters();
-    renderByAttribute(currentAttributeFilter);
-    renderThemeFilters();
-    renderByTheme(currentThemeFilter || getUniqueThemes()[0]);
-    renderCharacterFilters();
-    renderByCharacter(currentCharacterFilter || getSortedCharacters()[0].name[lang]);
-    
+    // 2. 언어 버튼 상태 변경
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
     });
+
+    // 3. 필터 변수값도 해당 언어로 동기화
+    const themes = getUniqueThemes();
+    if (!themes.includes(currentThemeFilter)) currentThemeFilter = themes[0];
+
+    const sorted = getSortedCharacters();
+    const charExists = sorted.some(c => c.name[currentLang] === currentCharacterFilter);
+    if (!charExists && sorted.length > 0) currentCharacterFilter = sorted[0].name[currentLang];
+
+    // 4. 현재 화면 새로고침
+    refreshCurrentSection();
 }
 
 document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        updateLanguage(btn.getAttribute('data-lang'));
-    });
+    btn.addEventListener('click', () => updateLanguage(btn.getAttribute('data-lang')));
 });
 
 // ============================================

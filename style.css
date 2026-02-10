@@ -60,7 +60,7 @@ body {
     background: var(--pink-light);
     pointer-events: none;
     z-index: 99999;
-    transition: transform 0.1s ease, background-color 0.2s ease;
+    transition: background-color 0.2s ease;
     transform: translate(-50%, -50%);
     mix-blend-mode: normal;
 }
@@ -270,7 +270,11 @@ main {
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
-    margin: 30px 0;
+    margin: 30px auto;
+
+    /* 가로 길이를 줄이는 핵심 코드 */
+    max-width: 800px;  /* 👈 원하는 가로 폭을 숫자로 지정 (예: 400px, 600px) */
+    width: 90%;        /* 👈 모바일 등 작은 화면을 위해 90% 정도를 주는 게 안전 */
 }
 
 .filter-btn {
@@ -400,6 +404,20 @@ main {
 .modal-info img {
     width: 24px;
     height: 24px;
+}
+
+.modal-required-pieces {
+    margin-top: 15px;
+    padding: 12px 15px;
+    background: #fff0f7;
+    border-radius: 10px;
+    font-size: 1.05em;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.modal-required-pieces span {
+    color: var(--pink-dark);
 }
 
 .modal-skill {
