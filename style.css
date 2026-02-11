@@ -588,3 +588,61 @@ main {
         margin: 20px auto;
     }
 }
+
+/* 초기 언어 선택 오버레이 스타일 */
+.language-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff5f7; /* 도감 테마와 어울리는 연분홍 배경 */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; /* 헤더나 커서보다 무조건 위에 오도록 */
+    opacity: 1;
+    transition: opacity 0.5s ease; /* 사라질 때 부드럽게 */
+}
+
+.overlay-content {
+    background: white;
+    padding: 40px 60px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(255, 182, 193, 0.3);
+}
+
+.overlay-content h2 {
+    margin-bottom: 30px;
+    color: #ff6b81;
+    font-family: 'NexonMaplestory', sans-serif;
+    font-size: 1.5rem;
+}
+
+.overlay-btns {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.overlay-btns button {
+    font-family: 'Quicksand', 'Kosugi Maru', 'NexonMaplestory', sans-serif;
+    
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: 2px solid #ffb6c1;
+    border-radius: 15px;
+    background: white;
+    color: #ff6b81;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* 마우스를 올렸을 때 효과도 유지 */
+.overlay-btns button:hover {
+    background: #ffb6c1;
+    color: white;
+    transform: translateY(-3px);
+}

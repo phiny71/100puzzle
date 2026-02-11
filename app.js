@@ -23,7 +23,7 @@ const translations = {
         'required-pieces': 'Required Pieces (Lv.5)'  // ← 추가
     },
     ja: {
-        'main-title': '💖 100パズ 図鑑 💖',
+        'main-title': '💖 100パズ図鑑 💖',
         'nav-all': '全体',
         'nav-attribute': '属性別',
         'nav-theme': 'テーマ別',
@@ -37,7 +37,7 @@ const translations = {
 // ============================================
 // 상태 (초기값 설정)
 // ============================================
-let currentLang = 'ko';
+let currentLang;
 let currentAttributeFilter = 'red';
 let currentThemeFilter = ''; // 초기화 시 설정됨
 let currentCharacterFilter = ''; // 초기화 시 설정됨
@@ -434,13 +434,62 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => updateLanguage(btn.getAttribute('data-lang')));
 });
 
+// 1. 초기 언어 선택 함수
+function selectInitialLang(lang) {
+    currentLang = lang; // 전역 변수에 언어 저장
+    updateLanguage(lang); // 화면 번역 및 데이터 렌더링
+    
+    const overlay = document.getElementById('language-overlay');
+    if (overlay) {
+        overlay.style.opacity = '0'; // 서서히 사라지는 효과
+        setTimeout(() => {
+            overlay.style.display = 'none'; // 완전히 제거
+        }, 500);
+    }
+    
+    localStorage.setItem('user-lang', lang); // 선택 기억하기
+}
+
+// ... (기존 운세 로직이나 기타 함수들) ...
+
+// 2. 파일의 가장 밑바닥: 초기화 실행
+function init() {
+    const savedLang = localStorage.getItem('user-lang');
+    const overlay = document.getElementById('language-overlay');
+
+    if (savedLang) {
+        // 이미 선택한 적이 있다면 바로 도감 보여주기
+        if (overlay) overlay.style.display = 'none';
+        updateLanguage(savedLang);
+    } else {
+        // 처음이라면 오버레이를 띄우고 대기
+        if (overlay) overlay.style.display = 'flex';
+    }
+}
+
+init();
+
 // ============================================
-// 초기화
+// 초기화 실행 로직
 // ============================================
-renderAllCharacters();
-renderAttributeFilters();
-renderByAttribute('red');
-renderThemeFilters();
-renderByTheme(getUniqueThemes()[0]);
-renderCharacterFilters();
-renderByCharacter(getSortedCharacters()[0].name[currentLang]);
+function init() {
+    const savedLang = localStorage.getItem('user-lang');
+    const overlay = document.getElementById('language-overlay');
+
+    if (savedLang) {
+        // 이미 언어가 저장되어 있다면: 
+        // 오버레이는 CSS에서 이미 none이므로 건드릴 필요 없음
+        updateLanguage(savedLang);
+    } else {
+        // 처음 방문했다면: 
+        // 그때 비로소 오버레이를 화면에 표시
+        if (overlay) overlay.style.display = 'flex';
+        
+        // (선택 사항) 선택 전까지 뒤의 배경이 하얗게 비어있는 게 싫다면 
+        // 임시로 한국어라도 렌더링해둘 수 있습니다.
+        // updateLanguage('ko'); 
+    }
+}
+
+// 최종 실행
+init();

@@ -13,7 +13,18 @@
 <body>
     <!-- Custom Cursor -->
     <div id="cursor"></div>
-    
+
+    <!-- 언어선택 -->
+    <div id="language-overlay" class="language-overlay">
+        <div class="overlay-content">
+            <h2 id="overlay-title">Select Language</h2>
+            <div class="overlay-btns">
+                <button onclick="selectInitialLang('ko')">한국어</button>
+                <button onclick="selectInitialLang('en')">English</button>
+                <button onclick="selectInitialLang('ja')">日本語</button>
+            </div>
+        </div>
+    </div>
     <!-- Header -->
     <header>
         <h1 id="main-title">💖 100퍼즐 도감 💖</h1>
