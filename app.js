@@ -23,7 +23,7 @@ const translations = {
         'required-pieces': 'Required Pieces (Lv.5)'  // ← 추가
     },
     ja: {
-        'main-title': '💖 100パズル図鑑 💖',
+        'main-title': '💖 100パズ 図鑑 💖',
         'nav-all': '全体',
         'nav-attribute': '属性別',
         'nav-theme': 'テーマ別',
