@@ -60,6 +60,46 @@ const attributeIcons = {
     purple: 'https://i.imgur.com/dzAAZg2.png'
 };
 
+// 생일 데이터
+const additionalBirthdays = [
+    { name: { ko: "하하리", en: "Hakari", ja: "羽香里" }, birthday: "06-22" },
+    { name: { ko: "카라네", en: "Karane", ja: "唐音" }, birthday: "09-09" },
+    { name: { ko: "시즈카", en: "Shizuka", ja: "静" }, birthday: "11-01" },
+    { name: { ko: "나노", en: "Nano", ja: "凪乃" }, birthday: "03-14" },
+    { name: { ko: "쿠스리", en: "Kusuri", ja: "楠莉" }, birthday: "04-18" },
+    { name: { ko: "하하리", en: "Hahari", ja: "羽々里" }, birthday: "05-12" },
+    { name: { ko: "쿠루미", en: "Kurumi", ja: "胡桃" }, birthday: "09-03" },
+    { name: { ko: "메이", en: "Mei", ja: "芽衣" }, birthday: "05-10" },
+    { name: { ko: "이쿠", en: "Iku", ja: "育" }, birthday: "01-09" },
+    { name: { ko: "미미미", en: "Mimimi", ja: "美々美" }, birthday: "03-03" },
+    { name: { ko: "메메", en: "Meme", ja: "愛々" }, birthday: "10-10" },
+    { name: { ko: "치요", en: "Chiyo", ja: "知与" }, birthday: "10-01" },
+    { name: { ko: "나디", en: "Naddy", ja: "ナディー" }, birthday: "02-11" },
+    { name: { ko: "야마메", en: "Yamame", ja: "山女" }, birthday: "08-11" },
+    { name: { ko: "모미지", en: "Momiji", ja: "紅葉" }, birthday: "04-08" },
+    { name: { ko: "야쿠", en: "Yaku", ja: "ヤク" }, birthday: "08-09" },
+    { name: { ko: "키시카", en: "Kishika", ja: "騎士華" }, birthday: "10-10" },
+    { name: { ko: "아코", en: "Ahko", ja: "あー子" }, birthday: "02-05" },
+    { name: { ko: "우토", en: "Uto", ja: "詩人" }, birthday: "05-16" },
+    { name: { ko: "마이", en: "Mai", ja: "妹" }, birthday: "09-06" },
+    { name: { ko: "모모하", en: "Momoha", ja: "百八" }, birthday: "10-08" },
+    { name: { ko: "린", en: "Rin", ja: "凛" }, birthday: "08-10" },
+    { name: { ko: "스우", en: "Suu", ja: "数" }, birthday: "01-23" },
+    { name: { ko: "에이라", en: "Eira", ja: "エイラ" }, birthday: "08-03" },
+    { name: { ko: "타마", en: "Tama", ja: "タマ (珠)" }, birthday: "02-22" },
+    { name: { ko: "히메카", en: "Himeka", ja: "姫歌" }, birthday: "10-31" },
+    { name: { ko: "마츠리", en: "Matsuri", ja: "祭李" }, birthday: "08-15" },
+    { name: { ko: "우사", en: "Usa-chan", ja: "椎奈" }, birthday: "04-17" },
+    { name: { ko: "메루", en: "Meru", ja: "夢留" }, birthday: "11-30" },
+    { name: { ko: "사키 선배", en: "Saki-Senpai", ja: "先 先輩" }, birthday: "04-01" },
+    { name: { ko: "네무", en: "Nemu", ja: "寧夢" }, birthday: "09-03" },
+    { name: { ko: "하스하", en: "Hasuha", ja: "蓮葉" }, birthday: "05-21" },
+    { name: { ko: "키마리", en: "Kimari", ja: "季鞠" }, birthday: "TBD" },
+    { name: { ko: "에루", en: "Eru", ja: "彗流" }, birthday: "TBD" },
+    { name: { ko: "치유", en: "Chiyu", ja: "千優" }, birthday: "TBD" },
+    { name: { ko: "코고에", en: "Kogoe", ja: "小々枝" }, birthday: "TBD" },
+];
+
 // 캐릭터 데이터 (총 55개)
 const characters = [
     // 키스 날리기 (7)
