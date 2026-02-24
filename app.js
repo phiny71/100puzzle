@@ -94,7 +94,116 @@ function refreshCurrentSection() {
 }
 
 // ============================================
-// 네비게이션
+// 생일 축하
+// ============================================
+function fireConfetti() {
+    var end = Date.now() + (3 * 1000); // 3초 동안 실행
+
+    (function frame() {
+        confetti({
+            particleCount: 2,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            zIndex: 20001
+        });
+        confetti({
+            particleCount: 2,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            zIndex: 20001
+        });
+
+        if (Date.now() < end) {
+            requestAnimationFrame(frame);
+        }
+    }());
+}
+
+function checkBirthdays() {
+    // 1. 오늘 이미 팝업을 닫았는지 확인
+    const closedDate = localStorage.getItem('birthday-popup-closed');
+    const todayDate = new Date().toISOString().split('T')[0];
+    
+    if (closedDate === todayDate) {
+        return; 
+    }
+
+    const today = new Date();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const date = String(today.getDate()).padStart(2, '0');
+    const todayStr = `${month}-${date}`;
+
+    const extraList = typeof additionalBirthdays !== 'undefined' ? additionalBirthdays : [];
+    const birthdayList = extraList.filter(c => c.birthday === todayStr);
+
+    if (birthdayList.length > 0) {
+        const modal = document.getElementById('birthday-modal');
+        const msg = document.getElementById('birthday-msg');
+        const confirmBtn = document.querySelector('.birthday-confirm-btn');
+        
+        const lang = (typeof currentLang !== 'undefined' && currentLang) ? currentLang : 'ko';
+
+        // --- [이름 합치기 로직] ---
+        let joinedNames = "";
+        const nameArray = birthdayList.map(c => c.name[lang] || c.name['ko']);
+
+        if (lang === 'ko') {
+            joinedNames = nameArray.length > 1 
+                ? nameArray.slice(0, -1).join(', ') + '와 ' + nameArray.slice(-1)
+                : nameArray[0];
+        } else if (lang === 'ja') {
+            joinedNames = nameArray.join('と');
+        } else {
+            joinedNames = nameArray.length > 1
+                ? nameArray.slice(0, -1).join(', ') + ' and ' + nameArray.slice(-1)
+                : nameArray[0];
+        }
+
+        const btnLabels = {
+            ko: "축하해!",
+            en: "Congrats!",
+            ja: "おめでとう！"
+        };
+        if (confirmBtn) {
+            confirmBtn.textContent = btnLabels[lang];
+        }
+
+        // --- [메시지 설정 및 팝업 표시] ---
+        const wishes = {
+            ko: `오늘은 ${joinedNames}의 생일입니다! 🎂`,
+            en: `Today is ${joinedNames}'s Birthday! 🎂`,
+            ja: `今日は ${joinedNames}の誕生日です! 🎂`
+        };
+
+        if (msg) msg.textContent = wishes[lang];
+
+        if (modal) {
+            modal.style.display = 'flex';
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                zIndex: 20001
+            });
+        }
+    }
+}
+
+function closeBirthdayModal() {
+    const modal = document.getElementById('birthday-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        
+        const today = new Date().toISOString().split('T')[0];
+        localStorage.setItem('birthday-popup-closed', today);
+    }
+}
+
+
+// ============================================
+// 내비게이션
 // ============================================
 document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -480,6 +589,7 @@ function init() {
         // 이미 언어가 저장되어 있다면: 
         // 오버레이는 CSS에서 이미 none이므로 건드릴 필요 없음
         updateLanguage(savedLang);
+        checkBirthdays(); 
     } else {
         // 처음 방문했다면: 
         // 그때 비로소 오버레이를 화면에 표시
