@@ -26,7 +26,17 @@
             </div>
         </div>
     </div>
-    <!-- Header -->
+    <!-- 생일 축하 -->
+    <div id="birthday-modal" class="birthday-modal">
+       <div class="birthday-content">
+           <span class="close-birthday" onclick="closeBirthdayModal()"></span>
+           <div class="birthday-deco"></div>
+           <h2 id="birthday-msg"></h2>
+           <div id="birthday-char-info"></div>
+           <button class="birthday-confirm-btn" onclick="closeBirthdayModal()"></button>
+       </div>
+   </div>
+   <!-- Header -->
     <header>
         <h1 id="main-title">💖 100퍼즐 도감 💖</h1>
         <nav>
@@ -109,6 +119,7 @@
     
     <!-- Scripts -->
     <script src="data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="app.js"></script>
     <script defer src="/_vercel/insights/script.js"></script>
 </body>
