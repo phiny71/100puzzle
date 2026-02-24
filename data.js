@@ -62,6 +62,8 @@ const attributeIcons = {
 
 // 생일 데이터
 const additionalBirthdays = [
+    { name: { ko: "나카무라 선생님", en: "Nakamura", ja: "キャプテン·ナカムラ先生" }, birthday: "05-31" },
+    { name: { ko: "노자와 선생님", en: "Nozawa", ja: "野澤ゆき子先生" }, birthday: "04-17" },
     { name: { ko: "하하리", en: "Hakari", ja: "羽香里" }, birthday: "06-22" },
     { name: { ko: "카라네", en: "Karane", ja: "唐音" }, birthday: "09-09" },
     { name: { ko: "시즈카", en: "Shizuka", ja: "静" }, birthday: "11-01" },
