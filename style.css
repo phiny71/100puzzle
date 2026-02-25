@@ -647,7 +647,7 @@ main {
 }
 
 .birthday-modal {
-    display: none;
+    display: none; /* 기본적으로 숨김 */
     position: fixed;
     z-index: 50000;
     left: 0;
@@ -660,12 +660,16 @@ main {
 }
 
 .birthday-content {
-    background: white;
+    background-color: white;
     padding: 30px;
     border-radius: 20px;
+    width: 100%;
+    max-width: 600px; /* 가로 너비 제한 */
+    max-height: 800px;
+    overflow-y: auto; /* 내용이 너무 길어지면 내부 스크롤 생성 */
     text-align: center;
-    border: 5px solid #ffb6c1;
-    animation: popUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
 @keyframes popUp {
@@ -673,10 +677,39 @@ main {
     to { transform: scale(1); opacity: 1; }
 }
 
+/* 이미지가 들어가는 컨테이너 */
+.birthday-images-container {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap; /* 캐릭터가 많으면 다음 줄로 넘어가게 */
+    margin-bottom: 25px;
+}
+
+/* 생일 이미지 스타일 */
+#birthday-modal .birthday-images-container img {
+    border-radius: 0px;
+    height: 800px;    
+    width: auto;
+    object-fit: contain !important; 
+    background: transparent; /* 배경이 원형이면 투명하게 */
+    border: none;            /* 테두리도 일단 제거해서 확인 */
+    box-shadow: none;
+}
+
+/* 메시지 텍스트 조절 */
+#birthday-msg {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    word-break: keep-all; /* 단어 단위로 줄바꿈 되어 깔끔함 */
+}
+
 .birthday-deco { font-size: 1.5rem; margin-bottom: 10px; }
 .birthday-confirm-btn {
     position: relative;
-    z-index: 60000;
+    z-index: 60000; /* 모달 컨텐츠보다 높게 */
     margin-top: 20px;
     padding: 10px 20px;
     background: #ffb6c1;
@@ -687,6 +720,36 @@ main {
 }
 
 .birthday-confirm-btn:hover {
-    background: #ff8c94;
-    transform: scale(1.05);
+    background: #ff8c94; /* 조금 더 진한 핑크색으로 변경 */
+    transform: scale(1.05); /* 버튼이 살짝 커지는 효과 (선택사항) */
+}
+
+.birthday-tab-style {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.birthday-tab-style img {
+    height: 400px; /* 탭에서는 더 시원하게 키워도 됩니다 */
+    width: auto;
+    object-fit: contain;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    /* 약간의 광택 효과 */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.d-day-badge {
+    font-size: 2.5rem;
+    color: #ff6b6b;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.birthday-name {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
 }
