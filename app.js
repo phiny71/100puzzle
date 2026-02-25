@@ -10,7 +10,11 @@ const translations = {
         'nav-character': '캐릭터별',
         'nav-fortune': '오늘의 운세',
         'fortune-btn-text': '운세 보기',
-        'required-pieces': '필요 피스 수 (Lv.5)'  // ← 추가
+        'required-pieces': '필요 피스 수 (Lv.5)',
+        'nav-birthday': '생일',
+        'birthday-title': '🎂 오늘 생일!',
+        'birthday-list-title': '📅 다가오는 생일 목록',
+        'birthday-today': '생일 축하해!',
     },
     en: {
         'main-title': '💖 100 Puzzle Encyclopedia 💖',
@@ -20,7 +24,11 @@ const translations = {
         'nav-character': 'By Character',
         'nav-fortune': 'Fortune',
         'fortune-btn-text': 'Get Fortune',
-        'required-pieces': 'Required Pieces (Lv.5)'  // ← 추가
+        'required-pieces': 'Required Pieces (Lv.5)',
+        'nav-birthday': 'Birthday',
+        'birthday-title': "🎂 Birthday girl/boy",
+        'birthday-list-title': '📅 Upcoming Birthdays',
+        'birthday-today': 'Happy Birthday!',
     },
     ja: {
         'main-title': '💖 100パズ図鑑 💖',
@@ -30,7 +38,11 @@ const translations = {
         'nav-character': 'キャラクター別',
         'nav-fortune': '今日の運勢',
         'fortune-btn-text': '運勢を見る',
-        'required-pieces': '必要ピース数 (Lv.5)'  // ← 추가
+        'required-pieces': '必要ピース数 (Lv.5)',
+        'nav-birthday': '誕生日',
+        'birthday-title': '🎂 今日の主人公',
+        'birthday-list-title': '📅 これからの誕生日リスト',
+        'birthday-today': 'お誕生日おめでとう！',
     }
 };
 
@@ -216,6 +228,9 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
         document.getElementById(targetSection).classList.add('active');
         
         window.scrollTo(0, 0);
+        if (targetSection === 'birthday') {
+            updateBirthdayTab(); 
+        }
 
         // 섹션별 초기 필터값 세팅 및 렌더링
         if (targetSection === 'theme' && !currentThemeFilter) {
@@ -465,6 +480,114 @@ function renderByCharacter(filter) {
 }
 
 // ============================================
+// 생일 탭
+// ============================================
+function updateBirthdayTab() {
+    const display = document.getElementById('birthday-countdown-container');
+    if (!display) return;
+
+    const lang = (typeof currentLang !== 'undefined') ? currentLang : 'ko';
+    const t = translations[lang];
+
+    // 언어별 축하 메시지 설정 (이 문구만 강조됩니다)
+    const messages = {
+        ko: "🎉 생일을 진심으로 축하합니다! 🎉",
+        en: "🎉 Happy Birthday! Have a wonderful day! 🎉",
+        ja: "🎉 お誕生日おめでとうございます！ 🎉"
+    };
+    const birthdayMsg = messages[lang] || messages['ko'];
+
+    const list = typeof additionalBirthdays !== 'undefined' ? additionalBirthdays : [];
+    if (list.length === 0) return;
+
+// 생일 날짜가 "00-00" 형식인 멤버들만 걸러내기 (TBD 멤버 자동 제외)
+    const validList = list.filter(char => char.birthday && /^\d{2}-\d{2}$/.test(char.birthday));
+    // --------------------------
+
+    // 1. D-Day 계산 로직
+    const sorted = list.map(char => {
+        const today = new Date();
+        const [m, d] = char.birthday.split('-').map(Number);
+        let target = new Date(today.getFullYear(), m - 1, d);
+        const todayMidnight = new Date();
+        todayMidnight.setHours(0, 0, 0, 0);
+        if (target < todayMidnight) target.setFullYear(today.getFullYear() + 1);
+        const diff = Math.ceil((target - todayMidnight) / (1000 * 60 * 60 * 24));
+        return { ...char, dDay: diff };
+    }).sort((a, b) => a.dDay - b.dDay);
+
+    const minDDay = sorted[0].dDay;
+    const heroes = sorted.filter(c => c.dDay === minDDay);
+    const upcoming = sorted.filter(c => c.dDay > minDDay).slice(0, 4);
+
+    // 2. 화면 렌더링
+    display.innerHTML = `
+        <div style="display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; justify-content: center; align-items: flex-start; gap: 60px; padding: 60px 20px; width: 100%; max-width: 1400px; margin: 0 auto; box-sizing: border-box;">
+            
+            <div style="flex: 1.2; text-align: center; min-width: 0;">
+                <h2 style="margin-bottom:40px; font-size: 2.2rem; color:#333;">${t['birthday-title']}</h2>
+                <div style="display: flex; flex-direction: row; justify-content: center; align-items: flex-end; gap: 20px; flex-wrap: wrap;">
+                    ${heroes.map(h => `
+                        <div style="text-align: center;">
+                            <img src="${h.image}" style="height: 380px; width: auto; object-fit: contain; border-radius: 20px; filter: drop-shadow(0 15px 20px rgba(0,0,0,0.15));">
+                            <div style="font-size: 1.8rem; font-weight: bold; margin-top: 15px; color: #222;">${h.name[lang] || h.name['ko']}</div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div style="display: inline-block; margin-top: 35px; background: #ff6b6b; color: white; padding: 18px 45px; border-radius: 50px; box-shadow: 0 10px 25px rgba(255,107,107,0.4);">
+                    <div style="font-size: 1.5rem; font-weight: bold; line-height: 1.2;">
+                        ${minDDay === 0 ? birthdayMsg : 'D-' + minDDay}
+                    </div>
+                </div>
+            </div>
+
+            <div style="width: 450px; flex-shrink: 0; background: #fff; border: 1px solid #eee; padding: 35px; border-radius: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.05); margin-top: 50px;">
+                <h3 style="margin-bottom:25px; color:#ff6b6b; font-size: 1.6rem; border-bottom: 2px solid #ffb6c1; padding-bottom: 15px; text-align: left;">
+                    ${t['birthday-list-title']}
+                </h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #fff5f5; color: #aaa; font-size: 0.9rem;">
+                            <th style="padding: 10px 0; text-align: left; font-weight: normal;">Profile</th>
+                            <th style="padding: 10px 10px; text-align: left; font-weight: normal;">Name</th>
+                            <th style="padding: 10px 10px; text-align: center; font-weight: normal;">Date</th>
+                            <th style="padding: 10px 0; text-align: right; font-weight: normal;">D-Day</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${upcoming.map(c => `
+    <tr style="border-bottom: 1px solid #f9f9f9;">
+        <td style="padding: 15px 0;"> 
+            <div style="width: 80px; height: 80px; overflow: hidden; border-radius: 15px; background: #fff5f5; border: 1px solid #ffe0e0;">
+                <img src="${c.image}" style="
+                    width: 100%; 
+                    height: 100%; 
+                    object-fit: cover; 
+                    transform: scale(1.15); /* 이미지를 1.1배 더 확대해서 칸에 밀착 */
+                    display: block;
+                ">
+            </div>
+        </td>
+        <td style="padding: 20px 10px; font-weight: 600; font-size: 1.2rem; text-align: left;">
+            ${c.name[lang] || c.name['ko']}
+        </td>
+        <td style="padding: 20px 10px; text-align: center; color: #888; font-size: 1.1rem;">
+            ${c.birthday}
+        </td>
+        <td style="padding: 20px 0; color: #ff6b6b; font-weight: bold; text-align: right; font-size: 1.2rem;">
+            D-${c.dDay}
+        </td>
+    </tr>
+`).join('')}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
+}
+
+// ============================================
 // 운세
 // ============================================
 document.getElementById('fortune-btn').addEventListener('click', () => {
@@ -533,8 +656,12 @@ function updateLanguage(lang) {
 
     const sorted = getSortedCharacters();
     const charExists = sorted.some(c => c.name[currentLang] === currentCharacterFilter);
+    
     if (!charExists && sorted.length > 0) currentCharacterFilter = sorted[0].name[currentLang];
-
+    const birthdaySection = document.getElementById('birthday');
+    if (birthdaySection && birthdaySection.classList.contains('active')) {
+        updateBirthdayTab();
+    }
     // 4. 현재 화면 새로고침
     refreshCurrentSection();
 }
@@ -553,13 +680,12 @@ function selectInitialLang(lang) {
         overlay.style.opacity = '0'; // 서서히 사라지는 효과
         setTimeout(() => {
             overlay.style.display = 'none'; // 완전히 제거
+            checkBirthdays(); 
         }, 500);
     }
     
     localStorage.setItem('user-lang', lang); // 선택 기억하기
 }
-
-// ... (기존 운세 로직이나 기타 함수들) ...
 
 // 2. 파일의 가장 밑바닥: 초기화 실행
 function init() {
