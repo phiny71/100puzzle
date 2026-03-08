@@ -157,48 +157,49 @@ function checkBirthdays() {
         
         const lang = (typeof currentLang !== 'undefined' && currentLang) ? currentLang : 'ko';
 
-        // --- [이름 합치기 로직] ---
-        let joinedNames = "";
+        // 1. 이름 합치기 로직 (생략 없이 그대로 사용)
         const nameArray = birthdayList.map(c => c.name[lang] || c.name['ko']);
+        let joinedNames = nameArray.length > 1 
+            ? nameArray.slice(0, -1).join(', ') + (lang === 'ko' ? '와 ' : (lang === 'ja' ? 'と' : ' and ')) + nameArray.slice(-1)
+            : nameArray[0];
 
-        if (lang === 'ko') {
-            joinedNames = nameArray.length > 1 
-                ? nameArray.slice(0, -1).join(', ') + '와 ' + nameArray.slice(-1)
-                : nameArray[0];
-        } else if (lang === 'ja') {
-            joinedNames = nameArray.join('と');
-        } else {
-            joinedNames = nameArray.length > 1
-                ? nameArray.slice(0, -1).join(', ') + ' and ' + nameArray.slice(-1)
-                : nameArray[0];
-        }
+        // 2. 이미지 HTML 생성
+        let imageHtml = '<div class="birthday-images-container" style="display: flex; justify-content: center; align-items: flex-end; gap: 20px; flex-wrap: wrap; margin-bottom: 40px; width: 100%;">';
 
-        const btnLabels = {
-            ko: "축하해!",
-            en: "Congrats!",
-            ja: "おめでとう！"
-        };
-        if (confirmBtn) {
-            confirmBtn.textContent = btnLabels[lang];
-        }
+        birthdayList.forEach(char => {
+          if (char.image) {
+        // 이미지가 2명일 때 가로로 나오게 하려면 높이를 300~400px 정도로 조절하는 게 좋습니다.
+        imageHtml += `
+            <img src="${char.image}" 
+                 style="width: auto !important; 
+                        height: 350px !important; 
+                        max-width: 80% !important; 
+                        border-radius: 10px !important; 
+                        object-fit: contain !important;">`;
+    }
+});
 
-        // --- [메시지 설정 및 팝업 표시] ---
+imageHtml += '</div>';
+
+        // 3. 메시지 설정 (문장 전체)
         const wishes = {
             ko: `오늘은 ${joinedNames}의 생일입니다! 🎂`,
             en: `Today is ${joinedNames}'s Birthday! 🎂`,
-            ja: `今日は ${joinedNames}の誕生日です! 🎂`
+            ja: `今日は ${joinedNames}の誕生日です！ 🎂`
         };
 
-        if (msg) msg.textContent = wishes[lang];
+        // 4. 화면에 뿌리기 (이미지 + 메시지)
+        if (msg) {
+            msg.innerHTML = `${imageHtml}<div>${wishes[lang]}</div>`;
+        }
+
+        // 버튼 라벨 설정
+        const btnLabels = { ko: "축하해!", en: "Congrats!", ja: "おめでとう！" };
+        if (confirmBtn) confirmBtn.textContent = btnLabels[lang];
 
         if (modal) {
             modal.style.display = 'flex';
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 },
-                zIndex: 20001
-            });
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, zIndex: 20001 });
         }
     }
 }
@@ -212,7 +213,6 @@ function closeBirthdayModal() {
         localStorage.setItem('birthday-popup-closed', today);
     }
 }
-
 
 // ============================================
 // 내비게이션
