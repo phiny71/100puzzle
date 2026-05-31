@@ -97,7 +97,7 @@ const additionalBirthdays = [
     { name: { ko: "사키 선배", en: "Saki-Senpai", ja: "先 先輩" }, birthday: "04-01", image: "images/33.jpg" },
     { name: { ko: "네무", en: "Nemu", ja: "寧夢" }, birthday: "09-03", image: "images/34.jpg" },
     { name: { ko: "하스하", en: "Hasuha", ja: "蓮葉" }, birthday: "05-21", image: "images/35.jpg" },
-    { name: { ko: "키마리", en: "Kimari", ja: "季鞠" }, birthday: "TBD", image: "images/36.jpg" },
+    { name: { ko: "키마리", en: "Kimari", ja: "季鞠" }, birthday: "10-01", image: "images/36.jpg" },
     { name: { ko: "에루", en: "Eru", ja: "彗流" }, birthday: "TBD", image: "images/37.jpg" },
     { name: { ko: "치유", en: "Chiyu", ja: "千優" }, birthday: "TBD", image: "images/38.jpg" },
     { name: { ko: "코고에", en: "Kogoe", ja: "小々枝" }, birthday: "TBD", image: "images/39.jpg" },
