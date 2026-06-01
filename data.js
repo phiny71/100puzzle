@@ -216,7 +216,7 @@ const characters = [
 
     // 수국 드레스 (4)
     { ...CHARS.hakari, image: 'https://pbs.twimg.com/media/HJtAOgUasAAQ3uf?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HJtAOgUasAAQ3uf?format=jpg&name=large', attribute: 'purple', theme: { ja: '紫陽花ドレス', ko: '수국 드레스', en: 'Hydrangea Dress' }, skillName: { ja: 'どうです？この衣装かわいい、ですか？', ko: '어떤가요? 이 옷은 귀여운, 가요?', en: 'How is it? Is this outfit, cute?' }, skillDesc: { ja: '緑ピースと黄色ピースをランダムに最大5個ずつ\n紫ピースに変換します。', ko: '무작위 초록 피스와 노랑 피스를 최대 5개까지 보라 피스로 바꿉니다.', en: 'Randomly change up to 5 green and yellow pieces into purple pieces.'}, requiredPieces: 28 },
-    { ...CHARS.nano, image: 'https://pbs.twimg.com/media/HJtOApMa8AAlNnf?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HJtOApMa8AAlNnf?format=jpg&name=large', attribute: 'sky', theme: { ja: '紫陽花ドレス', ko: '수국 드레스', en: 'Hydrangea Dress' }, skillName: { ja: '少しでも魅力を感じてもらうために選んだ…似合う？', ko: '조금이라도 매력을 알아줬으면 해서 골랐어… 어울려?', en: 'I chose it hoping you\’d see even a little bit of my charm… Does it suit me?' }, skillDesc: { ja: '「傘」の形にピースを消します。', ko: '우산 모양으로 피스를 제거합니다.', en: 'Clear pieces in a umbrella pattern.'}, requiredPieces: 41 },
+    { ...CHARS.nano, image: 'https://pbs.twimg.com/media/HJtOApMa8AAlNnf?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HJtOApMa8AAlNnf?format=jpg&name=large', attribute: 'sky', theme: { ja: '紫陽花ドレス', ko: '수국 드레스', en: 'Hydrangea Dress' }, skillName: { ja: '少しでも魅力を感じてもらうために選んだ…似合う？', ko: '조금이라도 매력을 알아줬으면 해서 골랐어… 어울려?', en: 'I chose it hoping you\’d see even a little bit of my charm…\nDoes it suit me?' }, skillDesc: { ja: '「傘」の形にピースを消します。', ko: '우산 모양으로 피스를 제거합니다.', en: 'Clear pieces in a umbrella pattern.'}, requiredPieces: 41 },
 
     
     
