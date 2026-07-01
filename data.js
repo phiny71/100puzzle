@@ -48,14 +48,14 @@ const CHARS = {
             { ja: '素敵な時間が待ってるわ❤', ko: '멋진 시간이 기다리고 있어❤', en: 'A wonderful time awaits❤' },
             { ja: 'たまにはこうして甘えてもいいわよ...💗', ko: '가끔은 이렇게 어리광부려도 돼...💗', en: 'It\'s okay to act spoiled like this sometimes...💗' }
         ]
-    }
+    },
     kurumi: {
         name: { ja: '原賀胡桃', ko: '하라가 쿠루미', en: 'Kurumi Haraga' },
         fortunes: [
             { ja: 'お腹すいた..', ko: '배고파..', en: 'I\'m hungry..' },
             { ja: 'いつも頼りにしてるよ', ko: '늘 의지하고 있어', en: 'I can always count on you' }
         ]
-    }
+    },
 };
 
 // 속성 아이콘
