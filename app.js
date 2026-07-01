@@ -438,6 +438,11 @@ function getSortedCharacters() {
         { ja: '薬膳楠莉', ko: '야쿠젠 쿠스리', en: 'Kusuri Yakuzen' },
         { ja: '薬膳楠莉（18歳）', ko: '야쿠젠 쿠스리(18세)', en: 'Kusuri Yakuzen (18)' },
         { ja: '花園羽々里', ko: '하나조노 하하리', en: 'Hahari Hanazono' }
+        { ja: '原賀胡桃', ko: '하라가 쿠루미', en: 'Kurumi Haraga' }
+        { ja: '銘戸芽衣', ko: '메이도 메이', en: 'Mei Meido' }
+        { ja: '須藤育', ko: '스토 이쿠', en: 'Iku Sutou' }
+        { ja: '美杉美々美', ko: '우츠쿠시스기 미미미', en: 'Mimimi Utsukushisugi' }
+        { ja: '華暮愛々', ko: '카쿠레 메메', en: 'Meme Kakure' }
     ];
     
     return order.map(orderItem => {
