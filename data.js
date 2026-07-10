@@ -53,7 +53,7 @@ const CHARS = {
         name: { ja: '原賀胡桃', ko: '하라가 쿠루미', en: 'Kurumi Haraga' },
         fortunes: [
             { ja: 'お腹すいた..', ko: '배고파..', en: 'I\'m hungry..' },
-            { ja: 'いつも頼りにしてるよ', ko: '늘 의지하고 있어', en: 'I can always count on you' }銘戸芽衣
+            { ja: 'いつも頼りにしてるよ', ko: '늘 의지하고 있어', en: 'I can always count on you' }
         ]
     },
     mei: {
