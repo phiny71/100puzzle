@@ -443,6 +443,7 @@ function getSortedCharacters() {
         { ja: '須藤育', ko: '스토 이쿠', en: 'Iku Sutou' },
         { ja: '美杉美々美', ko: '우츠쿠시스기 미미미', en: 'Mimimi Utsukushisugi' },
         { ja: '華暮愛々', ko: '카쿠레 메메', en: 'Meme Kakure' },
+        { ja: '銘戸芽衣', ko: '메이도 메이', en: 'Mei Meido' },
     ];
     
     return order.map(orderItem => {
