@@ -53,7 +53,14 @@ const CHARS = {
         name: { ja: '原賀胡桃', ko: '하라가 쿠루미', en: 'Kurumi Haraga' },
         fortunes: [
             { ja: 'お腹すいた..', ko: '배고파..', en: 'I\'m hungry..' },
-            { ja: 'いつも頼りにしてるよ', ko: '늘 의지하고 있어', en: 'I can always count on you' }
+            { ja: 'いつも頼りにしてるよ', ko: '늘 의지하고 있어', en: 'I can always count on you' }銘戸芽衣
+        ]
+    },
+    mei: {
+        name: { ja: '銘戸芽衣', ko: '메이도 메이', en: 'Mei Meido' },
+        fortunes: [
+            { ja: 'よろしければ、お茶をご用意いたしましょうか☕', ko: '괜찮으시면 차라도 준비해드릴까요☕', en: 'May I offer you a cup of tea?☕' },
+            { ja: 'かしこまりました', ko: '알겠습니다', en: 'Understood' }
         ]
     },
 };
@@ -122,6 +129,7 @@ const characters = [
     { ...CHARS.kusuri18, image: 'https://pbs.twimg.com/media/GofntvlaEAALPFH?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/GokV9OibAAAimte?format=jpg&name=large', attribute: 'green', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'おや？なぜ顔を赤くしているのだね？', ko: '응? 어째서 얼굴이 빨개진 거야?', en: 'Oh? Why is your face turning red?' }, skillDesc: { ja: '緑ピースをすべて消します。', ko: '초록 피스를 전부 제거합니다.', en: 'Clear all green pieces.' }, requiredPieces: 37 },
     { ...CHARS.hahari, image: 'https://pbs.twimg.com/media/GofujyyaIAAsxkW?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/Gokjy8HbwAA8X3o?format=jpg&name=large', attribute: 'red', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'あなたとの出会いは運命かしらね♡', ko: '당신과의 만남은 운명일지도♡', en: 'Meeting you might be destiny, don\'t you think?♡' }, skillDesc: { ja: '赤ピースをすべて消します。', ko: '빨강 피스를 전부 제거합니다.', en: 'Clear all red pieces.' }, requiredPieces: 37 },
     { ...CHARS.kurumi, image: 'https://pbs.twimg.com/media/HMHf6VQboAAccGq?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HMHf6VQboAAccGq?format=jpg&name=large', attribute: 'red', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'な、なんだよ… あんまりこっち見んなってば…！', ko: '뭐, 뭐야... 그렇게 빤히 보지 말라니까...!', en: 'W-What...? S-Stop staring at me like that...!' }, skillDesc: { ja: '赤ピースをすべて消します。', ko: '빨강 피스를 전부 제거합니다.', en: 'Clear all red pieces.' }, requiredPieces: 37 },
+    { ...CHARS.mei, image: 'https://pbs.twimg.com/media/HM1oeRkbAAIGddL?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HM1oeRkbAAIGddL?format=jpg&name=large', attribute: 'yellow', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'これからも末長く私めにお仕えさせてくださいませ', ko: '앞으로도 오래오래 제가 모실 수 있게 해주세요', en: 'Please allow me to continue serving you for many years to come.' }, skillDesc: { ja: '黄色ピースをすべて消します。', ko: '노랑 피스를 전부 제거합니다.', en: 'Clear all yellow pieces.' }, requiredPieces: 37 },
 
     
     // 토끼귀 패밀리 (7)
