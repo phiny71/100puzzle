@@ -63,6 +63,13 @@ const CHARS = {
             { ja: 'かしこまりました', ko: '알겠습니다', en: 'Understood' }
         ]
     },
+    iku: {
+        name: { ja: '須藤育', ko: '스토 이쿠', en: 'Iku Sutou' },
+        fortunes: [
+            { ja: '修行はいいよ！ 修行は！', ko: '수행은 좋지! 수행은', en: 'Training is good! with hard work!' },
+            { ja: 'ボクとジャンケツバットをしましょう！ ⚾', ko: '나랑 "가위바위보 지면 엉덩이 배트"를 하자! ⚾', en: 'Play buttbatt-scissors with me! ⚾' }
+        ]
+    },
 };
 
 // 속성 아이콘
@@ -130,7 +137,9 @@ const characters = [
     { ...CHARS.hahari, image: 'https://pbs.twimg.com/media/GofujyyaIAAsxkW?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/Gokjy8HbwAA8X3o?format=jpg&name=large', attribute: 'red', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'あなたとの出会いは運命かしらね♡', ko: '당신과의 만남은 운명일지도♡', en: 'Meeting you might be destiny, don\'t you think?♡' }, skillDesc: { ja: '赤ピースをすべて消します。', ko: '빨강 피스를 전부 제거합니다.', en: 'Clear all red pieces.' }, requiredPieces: 37 },
     { ...CHARS.kurumi, image: 'https://pbs.twimg.com/media/HMHf6VQboAAccGq?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HMHf6VQboAAccGq?format=jpg&name=large', attribute: 'red', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'な、なんだよ… あんまりこっち見んなってば…！', ko: '뭐, 뭐야... 그렇게 빤히 보지 말라니까...!', en: 'W-What...? S-Stop staring at me like that...!' }, skillDesc: { ja: '赤ピースをすべて消します。', ko: '빨강 피스를 전부 제거합니다.', en: 'Clear all red pieces.' }, requiredPieces: 37 },
     { ...CHARS.mei, image: 'https://pbs.twimg.com/media/HM1oeRkbAAIGddL?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HM1oeRkbAAIGddL?format=jpg&name=large', attribute: 'yellow', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'これからも末長く私めにお仕えさせてくださいませ', ko: '앞으로도 오래오래 제가 모실 수 있게 해주세요', en: 'Please allow me to continue serving you for many years to come.' }, skillDesc: { ja: '黄色ピースをすべて消します。', ko: '노랑 피스를 전부 제거합니다.', en: 'Clear all yellow pieces.' }, requiredPieces: 37 },
+    { ...CHARS.iku, image: 'https://pbs.twimg.com/media/HNe1LIcbIAA22_Y?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HNe1LIcbIAA22_Y?format=jpg&name=large', attribute: 'sky', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'えへへ… なんだかちょっと照れちゃうな', ko: '에헤헤.. 왠지 조금 부끄럽네', en: 'Hehe... Somehow, I'm getting a little embarrassed.' }, skillDesc: { ja: '空色ピースをすべて消します。', ko: '하늘 피스를 전부 제거합니다.', en: 'Clear all sky pieces.' }, requiredPieces: 37 },
 
+    
     
     // 토끼귀 패밀리 (7)
     { ...CHARS.hakari, image: 'https://pbs.twimg.com/media/GpYDrWuacAAMl5E?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/GpWxFeWbkAALrYv?format=jpg&name=large', attribute: 'purple', theme: { ja: 'うさ耳ファミリー', ko: '토끼귀 패밀리', en: 'Bunny Ear Family' }, skillName: { ja: 'ぴょんぴょん♪ うさぎさんですよ～', ko: '깡총깡총♪ 토끼 씨예요~', en: 'Hop hop♪ I\'m a bunny~' }, skillDesc: { ja: '自分を中心として5x5のピースを消します。', ko: '자신을 중심으로 5x5 피스를 제거합니다.', en: 'Clear 5x5 pieces centered on self.' }, requiredPieces: 37 },
