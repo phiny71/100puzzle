@@ -66,18 +66,24 @@ document.addEventListener('mousemove', (e) => {
 });
 
 function animateCursor() {
-    currentX += (cursorX - currentX) * 0.3; // 부드러움 조절
+    currentX += (cursorX - currentX) * 0.3; // 부드러움 감도 유지
     currentY += (cursorY - currentY) * 0.3;
-    if(cursor) {
-        cursor.style.left = currentX + 'px';
-        cursor.style.top = currentY + 'px';
+    
+    if (cursor) {
+        // [핵심 변경] left/top 대신 3D 하드웨어 가속을 쓰는 transform을 사용합니다.
+        // 그리고 -50%, -50% 처리를 CSS 대신 자바스크립트 좌표축에서 직접 밀어주면 연산이 더 부드럽습니다.
+        // (만약 CSS에서 이미 중심축을 잡았다면 ${currentX}px, ${currentY}px 로 적으셔도 됩니다)
+        cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
     }
     requestAnimationFrame(animateCursor);
 }
-animateCursor();
+// 루프 시작
+requestAnimationFrame(animateCursor);
 
-// 호버 효과 통합 관리
+// 호버 효과 통합 관리 (기존 코드 완벽 유지)
 document.addEventListener('mouseover', (e) => {
+    // cursor가 존재할 때만 작동하도록 안전장치 추가
+    if (!cursor) return;
     const target = e.target.closest('button, a, .character-card');
     cursor.classList.toggle('hover', !!target);
 });
