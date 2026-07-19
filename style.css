@@ -54,15 +54,19 @@ body {
 ============================================ */
 #cursor {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background: var(--pink-light);
     pointer-events: none;
     z-index: 99999;
-    transition: background-color 0.2s ease;
-    transform: translate(-50%, -50%);
+    /* 배경색과 크기(scale) 변화만 부드럽게 이어지도록 설정 */
+    transition: background-color 0.2s ease, transform 0.15s ease-out;
     mix-blend-mode: normal;
+    /* 브라우저 그래픽카드 가속 활성화 */
+    will-change: transform; 
 }
 
 #cursor::after {
@@ -73,10 +77,11 @@ body {
     transform: translate(-50%, -50%);
     font-size: 14px;
     color: var(--pink);
+    transition: color 0.2s ease;
 }
 
+/* 마우스 호버 시 크기가 커지는 효과 유지 (자바스크립트의 3D 이동과 겹치지 않게 분리 관리) */
 #cursor.hover {
-    transform: translate(-50%, -50%) scale(1.5);
     background: var(--pink);
 }
 
