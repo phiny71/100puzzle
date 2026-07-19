@@ -454,17 +454,30 @@ function renderCharacterFilters() {
     const container = document.getElementById('character-filters');
     const sorted = getSortedCharacters();
     
+    // 1. 버튼 목록은 처음에 딱 한 번만 화면에 그립니다.
     container.innerHTML = sorted.map(char => `
         <button class="filter-btn ${currentCharacterFilter === char.name[currentLang] ? 'active' : ''}" data-char-name="${char.name[currentLang]}">
             <span>${char.name[currentLang]}</span>
         </button>
     `).join('');
     
+    // 2. 이벤트 리스너 설정
     container.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const charName = btn.getAttribute('data-char-name');
             currentCharacterFilter = charName;
-            renderCharacterFilters();
+            
+            // [핵심 수정] 함수 전체를 다시 실행(renderCharacterFilters())하지 않고,
+            // 활성화된 버튼의 디자인(클래스)만 가볍게 교체합니다.
+            container.querySelectorAll('.filter-btn').forEach(b => {
+                if (b.getAttribute('data-char-id') === currentCharacterFilter) {
+                    b.classList.add('active');
+                } else {
+                    b.classList.remove('active');
+                }
+            });
+            
+            // 아래 카드 목록만 새로 갱신합니다.
             renderByCharacter(charName);
         });
     });
