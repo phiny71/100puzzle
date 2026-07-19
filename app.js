@@ -59,6 +59,7 @@ let currentCharacterFilter = ''; // 초기화 시 설정됨
 // ============================================
 const cursor = document.getElementById('cursor');
 let cursorX = 0, cursorY = 0, currentX = 0, currentY = 0;
+let isHovered = false; // 호버 상태를 체크할 변수 추가
 
 document.addEventListener('mousemove', (e) => {
     cursorX = e.clientX;
@@ -66,26 +67,33 @@ document.addEventListener('mousemove', (e) => {
 });
 
 function animateCursor() {
-    currentX += (cursorX - currentX) * 0.3; // 부드러움 감도 유지
+    // 부드럽게 따라오는 감도 0.3 유지
+    currentX += (cursorX - currentX) * 0.3;
     currentY += (cursorY - currentY) * 0.3;
     
     if (cursor) {
-        // [핵심 변경] left/top 대신 3D 하드웨어 가속을 쓰는 transform을 사용합니다.
-        // 그리고 -50%, -50% 처리를 CSS 대신 자바스크립트 좌표축에서 직접 밀어주면 연산이 더 부드럽습니다.
-        // (만약 CSS에서 이미 중심축을 잡았다면 ${currentX}px, ${currentY}px 로 적으셔도 됩니다)
-        cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+        // 커서 중심을 마우스 끝에 맞추기 위해 커서 크기의 절반(10px)을 빼줍니다.
+        const targetX = currentX - 10;
+        const targetY = currentY - 10;
+        
+        // 호버 상태면 scale(1.5)를 붙이고, 아니면 평소 크기 유지
+        const scaleStr = isHovered ? 'scale(1.5)' : 'scale(1)';
+        
+        // 3D 가속 이동과 크기 변형을 한 번에 처리합니다. (절대 안 깨지는 핵심 코드)
+        cursor.style.transform = `translate3d(${targetX}px, ${targetY}px, 0) ${scaleStr}`;
     }
     requestAnimationFrame(animateCursor);
 }
-// 루프 시작
 requestAnimationFrame(animateCursor);
 
-// 호버 효과 통합 관리 (기존 코드 완벽 유지)
+// 호버 효과 통합 관리
 document.addEventListener('mouseover', (e) => {
-    // cursor가 존재할 때만 작동하도록 안전장치 추가
     if (!cursor) return;
     const target = e.target.closest('button, a, .character-card');
-    cursor.classList.toggle('hover', !!target);
+    
+    // 상태 변수 업데이트 및 클래스 토글
+    isHovered = !!target;
+    cursor.classList.toggle('hover', isHovered);
 });
 
 // ============================================
