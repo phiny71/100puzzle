@@ -70,7 +70,16 @@ const CHARS = {
             { ja: 'ボクとジャンケツバットをしましょう！ ⚾', ko: '나랑 "가위바위보 지면 엉덩이 배트"를 하자! ⚾', en: 'Play buttbatt-scissors with me! ⚾' }
         ]
     },
+    mimimi: {
+        name: { ja: '美杉美々美', ko: '우츠쿠시스기 미미미', en: 'Mimimi Utsukushisugi' },
+        fortunes: [
+            { ja: 'ふふーんですわ！', ko: '흐흥-이에요!', en: 'Mm, indeed!' },
+            { ja: '美しさとは何かから与えられるものではない✨', ko: '아름다움이란 뭔가에서 얻을 수 있는 게 아니예요✨', en: 'Beauty is not something that is simply bestown✨' }
+        ]
+    },
 };
+
+
 
 // 속성 아이콘
 const attributeIcons = {
@@ -127,7 +136,7 @@ const additionalBirthdays = [
 
 // 캐릭터 데이터 (총 55개)
 const characters = [
-    // 키스 날리기 (8)
+    // 키스 날리기 (13)
     { ...CHARS.hakari, image: 'https://pbs.twimg.com/media/GnXGPCdbEAAfdpW?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/GnXF_1CawAAjekY?format=jpg&name=large', attribute: 'red', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'これからずっとずっと一緒ですね♪', ko: '앞으로도 계속 함께네요♪', en: "We'll be together forever and ever♪" }, skillDesc: { ja: '赤ピースをすべて消します。', ko: '빨강 피스를 전부 제거합니다.', en: 'Clear all red pieces.' }, requiredPieces: 37 },
     { ...CHARS.karane, image: 'https://pbs.twimg.com/media/GnXUBBab0AEaIoq?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/GncPywbbsAAOTj8?format=jpg&name=large', attribute: 'yellow', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'べっ別に会えて嬉しいなんて思ってないんだからねっ', ko: '따, 딱히 만나서 기쁘다는 생각 같은 건 안 했거든', en: "I-it's not like I'm happy to see you or anything!" }, skillDesc: { ja: '黄色ピースをすべて消します。', ko: '노랑 피스를 전부 제거합니다.', en: 'Clear all yellow pieces.' }, requiredPieces: 37 },
     { ...CHARS.shizuka, image: 'https://pbs.twimg.com/media/Gn67wbSaEAAgc74?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/GoAE-s4bMAEQCiE?format=jpg&name=large', attribute: 'sky', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: '"愛おしい人よ"「今後ともよろしく」"なのです"', ko: '"소중한 그대여" 「앞으로도 잘 부탁드리는」 "바입니다"', en: '"My beloved" "I look forward to our future together" "indeed"' }, skillDesc: { ja: '空色ピースをすべて消します。', ko: '하늘 피스를 전부 제거합니다.', en: 'Clear all sky pieces.' }, requiredPieces: 37 },
@@ -138,6 +147,7 @@ const characters = [
     { ...CHARS.kurumi, image: 'https://pbs.twimg.com/media/HMHf6VQboAAccGq?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HMHf6VQboAAccGq?format=jpg&name=large', attribute: 'red', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'な、なんだよ… あんまりこっち見んなってば…！', ko: '뭐, 뭐야... 그렇게 빤히 보지 말라니까...!', en: 'W-What...? S-Stop staring at me like that...!' }, skillDesc: { ja: '赤ピースをすべて消します。', ko: '빨강 피스를 전부 제거합니다.', en: 'Clear all red pieces.' }, requiredPieces: 37 },
     { ...CHARS.mei, image: 'https://pbs.twimg.com/media/HM1oeRkbAAIGddL?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HM1oeRkbAAIGddL?format=jpg&name=large', attribute: 'yellow', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'これからも末長く私めにお仕えさせてくださいませ', ko: '앞으로도 오래오래 제가 모실 수 있게 해주세요', en: 'Please allow me to continue serving you for many years to come.' }, skillDesc: { ja: '黄色ピースをすべて消します。', ko: '노랑 피스를 전부 제거합니다.', en: 'Clear all yellow pieces.' }, requiredPieces: 37 },
     { ...CHARS.iku, image: 'https://pbs.twimg.com/media/HNe1LIcbIAA22_Y?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HNe1LIcbIAA22_Y?format=jpg&name=large', attribute: 'sky', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'えへへ… なんだかちょっと照れちゃうな', ko: '에헤헤.. 왠지 조금 부끄럽네', en: 'Hehe... Somehow, I\'m getting a little embarrassed.' }, skillDesc: { ja: '空色ピースをすべて消します。', ko: '하늘 피스를 전부 제거합니다.', en: 'Clear all sky pieces.' }, requiredPieces: 37 },
+    { ...CHARS.mimimi, image: 'https://pbs.twimg.com/media/HOm7ekaa4AEys2O?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HOm7ekaa4AEys2O?format=jpg&name=large', attribute: 'purple', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'この美しいわたくしの虜になってもよろしくってよ！', ko: '이 아름다운 저에게 푹 빠져도 좋답니다!', en: 'You\'re more than welcome to become captivated by my beauty!' }, skillDesc: { ja: '紫ピースをすべて消します。', ko: '보라 피스를 전부 제거합니다.', en: 'Clear all purple pieces.' }, requiredPieces: 37 },
 
     
     
