@@ -77,6 +77,13 @@ const CHARS = {
             { ja: '美しさとは何かから与えられるものではない✨', ko: '아름다움이란 뭔가에서 얻을 수 있는 게 아니예요✨', en: 'Beauty is not something that is simply bestown✨' }
         ]
     },
+    meme: {
+        name: { ja: '華暮愛々', ko: '카쿠레 메메', en: 'Meme Kakure' },
+        fortunes: [
+            { ja: '前髪が！', ko: '앞머리가!', en: 'My bangs!' },
+            { ja: 'あみぐるみを編んできたんです...🧶', ko: '털실 인형을 만들어 왔어요...🧶', en: 'I crocheted this amigurumi and brought it with me...🧶' }
+        ]
+    },
 };
 
 
@@ -148,6 +155,7 @@ const characters = [
     { ...CHARS.mei, image: 'https://pbs.twimg.com/media/HM1oeRkbAAIGddL?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HM1oeRkbAAIGddL?format=jpg&name=large', attribute: 'yellow', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'これからも末長く私めにお仕えさせてくださいませ', ko: '앞으로도 오래오래 제가 모실 수 있게 해주세요', en: 'Please allow me to continue serving you for many years to come.' }, skillDesc: { ja: '黄色ピースをすべて消します。', ko: '노랑 피스를 전부 제거합니다.', en: 'Clear all yellow pieces.' }, requiredPieces: 37 },
     { ...CHARS.iku, image: 'https://pbs.twimg.com/media/HNe1LIcbIAA22_Y?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HNe1LIcbIAA22_Y?format=jpg&name=large', attribute: 'sky', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'えへへ… なんだかちょっと照れちゃうな', ko: '에헤헤.. 왠지 조금 부끄럽네', en: 'Hehe... Somehow, I\'m getting a little embarrassed.' }, skillDesc: { ja: '空色ピースをすべて消します。', ko: '하늘 피스를 전부 제거합니다.', en: 'Clear all sky pieces.' }, requiredPieces: 37 },
     { ...CHARS.mimimi, image: 'https://pbs.twimg.com/media/HOm7ekaa4AEys2O?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HOm7ekaa4AEys2O?format=jpg&name=large', attribute: 'purple', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'この美しいわたくしの虜になってもよろしくってよ！', ko: '이 아름다운 저에게 푹 빠져도 좋답니다!', en: 'You\'re more than welcome to become captivated by my beauty!' }, skillDesc: { ja: '紫ピースをすべて消します。', ko: '보라 피스를 전부 제거합니다.', en: 'Clear all purple pieces.' }, requiredPieces: 37 },
+    { ...CHARS.meme, image: 'https://pbs.twimg.com/media/HPVRwZQaEAADUmx?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HPVRwZQaEAADUmx?format=jpg&name=large', attribute: 'green', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'こ、こんな私でよければ…これからも一緒にいてくれますか？', ko: '저, 저 같은 사람이라도 괜찮다면… 앞으로도 계속 함께 있어 주실래요?', en: 'I-If someone like me is enough...\nWould you stay by my side from now on?' }, skillDesc: { ja: '緑ピースをすべて消します。', ko: '초록 피스를 전부 제거합니다.', en: 'Clear all green pieces.' }, requiredPieces: 37 },
 
     
     
