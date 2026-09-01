@@ -264,6 +264,8 @@ const characters = [
     { ...CHARS.shizuka, image: 'https://pbs.twimg.com/media/HKbIxdrakAA2QF3?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HKbIxdrakAA2QF3?format=jpg&name=large', attribute: 'red', theme: { ja: '紫陽花ドレス', ko: '수국 드레스', en: 'Hydrangea Dress' }, skillName: { ja: '"新たな装いを"「手に入れたのであった」', ko: '"새로운 옷차림을" 「손에 넣은 것이다」', en: '"I\'ve acquired" "a new look"' }, skillDesc: { ja: '「傘」の形にピースを消します。', ko: '우산 모양으로 피스를 제거합니다.', en: 'Clear pieces in a umbrella pattern.'}, requiredPieces: 41 },
     { ...CHARS.hahari, image: 'https://pbs.twimg.com/media/HKbWgBBbEAAkWEc?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HKbWgBBbEAAkWEc?format=jpg&name=large', attribute: 'purple', theme: { ja: '紫陽花ドレス', ko: '수국 드레스', en: 'Hydrangea Dress' }, skillName: { ja: 'あなたに気に入ってもらいたくて… ど、どうかしら…？', ko: '너가 좋아해줬으면 좋겠어서... 어, 어때?', en: 'I wanted you to like it… H-how do I look?' }, skillDesc: { ja: '赤ピースと空色ピースをランダムに最大5個ずつ\n紫ピースに変換します。', ko: '무작위 빨강 피스와 하늘 피스를 최대 5개까지 보라 피스로 바꿉니다.', en: 'Randomly change up to 5 red and sky pieces into purple pieces.'}, requiredPieces: 28 },
 
+    // 파자마 파티 (4)
+    { ...CHARS.karane, image: 'https://pbs.twimg.com/media/HRHpvn2agAAuril?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HRHpvn2agAAuril?format=jpg&name=large', attribute: 'red', theme: { ja: 'パジャマパーティー', ko: '파자마 파티', en: 'Pajama Party' }, skillName: { ja: 'はぁ！？可愛いなんて… そんな… 嬉しくなんか…', ko: '하아!? 귀엽다니... 그런... 기쁘기는 무슨...', en: 'Huh!? Cute, you say...?\nNo... It\'s not like I\'m happy or anything...' }, skillDesc: { ja: '空色ピースをランダムに最大10個赤ピースに変換します。', ko: '무작위 하늘 피스를 최대 10개 빨강 피스로 바꿉니다.', en: 'Randomly change up to 10 sky pieces into red pieces.'}, requiredPieces: 31 },
     
     
     
