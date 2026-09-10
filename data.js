@@ -138,6 +138,7 @@ const additionalBirthdays = [
     { name: { ko: "에루", en: "Eru", ja: "彗流" }, birthday: "TBD", image: "images/37.jpg" },
     { name: { ko: "치유", en: "Chiyu", ja: "千優" }, birthday: "TBD", image: "images/38.jpg" },
     { name: { ko: "코고에", en: "Kogoe", ja: "小々枝" }, birthday: "TBD", image: "images/39.jpg" },
+    { name: { ko: "라나", en: "Rana", ja: "蘭那" }, birthday: "TBD", image: "images/40.jpg" },
 
 ];
 
@@ -156,9 +157,7 @@ const characters = [
     { ...CHARS.iku, image: 'https://pbs.twimg.com/media/HNe1LIcbIAA22_Y?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HNe1LIcbIAA22_Y?format=jpg&name=large', attribute: 'sky', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'えへへ… なんだかちょっと照れちゃうな', ko: '에헤헤.. 왠지 조금 부끄럽네', en: 'Hehe... Somehow, I\'m getting a little embarrassed.' }, skillDesc: { ja: '空色ピースをすべて消します。', ko: '하늘 피스를 전부 제거합니다.', en: 'Clear all sky pieces.' }, requiredPieces: 37 },
     { ...CHARS.mimimi, image: 'https://pbs.twimg.com/media/HOm7ekaa4AEys2O?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HOm7ekaa4AEys2O?format=jpg&name=large', attribute: 'purple', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'この美しいわたくしの虜になってもよろしくってよ！', ko: '이 아름다운 저에게 푹 빠져도 좋답니다!', en: 'You\'re more than welcome to become captivated by my beauty!' }, skillDesc: { ja: '紫ピースをすべて消します。', ko: '보라 피스를 전부 제거합니다.', en: 'Clear all purple pieces.' }, requiredPieces: 37 },
     { ...CHARS.meme, image: 'https://pbs.twimg.com/media/HPVRwZQaEAADUmx?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HPVRwZQaEAADUmx?format=jpg&name=large', attribute: 'green', theme: { ja: '投げキッス', ko: '키스 날리기', en: 'Blowing Kiss' }, skillName: { ja: 'こ、こんな私でよければ…これからも一緒にいてくれますか？', ko: '저, 저 같은 사람이라도 괜찮다면… 앞으로도 계속 함께 있어 주실래요?', en: 'I-If someone like me is enough...\nWould you stay by my side from now on?' }, skillDesc: { ja: '緑ピースをすべて消します。', ko: '초록 피스를 전부 제거합니다.', en: 'Clear all green pieces.' }, requiredPieces: 37 },
-
-    
-    
+  
     // 토끼귀 패밀리 (7)
     { ...CHARS.hakari, image: 'https://pbs.twimg.com/media/GpYDrWuacAAMl5E?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/GpWxFeWbkAALrYv?format=jpg&name=large', attribute: 'purple', theme: { ja: 'うさ耳ファミリー', ko: '토끼귀 패밀리', en: 'Bunny Ear Family' }, skillName: { ja: 'ぴょんぴょん♪ うさぎさんですよ～', ko: '깡총깡총♪ 토끼 씨예요~', en: 'Hop hop♪ I\'m a bunny~' }, skillDesc: { ja: '自分を中心として5x5のピースを消します。', ko: '자신을 중심으로 5x5 피스를 제거합니다.', en: 'Clear 5x5 pieces centered on self.' }, requiredPieces: 37 },
     { ...CHARS.karane, image: 'https://pbs.twimg.com/media/Go4uj9abQAA_bOM?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/GozlGT5bgAA6lj9?format=jpg&name=large', attribute: 'red', theme: { ja: 'うさ耳ファミリー', ko: '토끼귀 패밀리', en: 'Bunny Ear Family' }, skillName: { ja: 'な、なに見てるのよっ！', ko: '뭐, 뭘 보는 거야!', en: 'Wh-what are you looking at!' }, skillDesc: { ja: '自分を中心として5x5のピースを消します。', ko: '자신을 중심으로 5x5 피스를 제거합니다.', en: 'Clear 5x5 pieces centered on self.' }, requiredPieces: 37 },
@@ -266,7 +265,8 @@ const characters = [
 
     // 파자마 파티 (4)
     { ...CHARS.karane, image: 'https://pbs.twimg.com/media/HRHpvn2agAAuril?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HRHpvn2agAAuril?format=jpg&name=large', attribute: 'red', theme: { ja: 'パジャマパーティー', ko: '파자마 파티', en: 'Pajama Party' }, skillName: { ja: 'はぁ！？可愛いなんて… そんな… 嬉しくなんか…', ko: '하아!? 귀엽다니... 그런... 기쁘기는 무슨...', en: 'Huh!? Cute, you say...?\nNo... It\'s not like I\'m happy or anything...' }, skillDesc: { ja: '空色ピースをランダムに最大10個赤ピースに変換します。', ko: '무작위 하늘 피스를 최대 10개 빨강 피스로 바꿉니다.', en: 'Randomly change up to 10 sky pieces into red pieces.'}, requiredPieces: 31 },
-    
+    { ...CHARS.hahari, image: 'https://pbs.twimg.com/media/HR07DMSacAAoqN3?format=jpg&name=large', detailImage: 'https://pbs.twimg.com/media/HR07DMSacAAoqN3?format=jpg&name=large', attribute: 'green', theme: { ja: 'パジャマパーティー', ko: '파자마 파티', en: 'Pajama Party' }, skillName: { ja: '待望のパジャマパーティーよーーーーっ！', ko: '기다리고 기다리던 파자마 파티야-!', en: 'The long-awaited pajama party is finally here----!' }, skillDesc: { ja: '「三日月」の形にピースを消します。', ko: '초승달 모양으로 피스를 제거합니다.', en: 'Clear pieces in a crescent moon shape.'}, requiredPieces: 40 },
+
     
     
 ];
